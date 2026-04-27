@@ -1,0 +1,1 @@
+export { default } from "file:///C:/Users/Galab_LD/Documents/ova-filosofia/node_modules/@nuxt/vite-builder/dist/vite-node-runner.mjs"

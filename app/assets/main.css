@@ -1,0 +1,121 @@
+:root {
+  --font-display: 'Fredoka One', cursive;
+  --font-body: 'Nunito', sans-serif;
+}
+
+* {
+  font-family: var(--font-body) !important;
+}
+
+.display-font {
+  font-family: var(--font-display) !important;
+}
+
+.v-application {
+  background: linear-gradient(135deg, #EDE7F6 0%, #F3E5F5 50%, #E8EAF6 100%) !important;
+  min-height: 100vh;
+}
+
+/* Accessibility: large readable text */
+.body-text {
+  font-size: 1.1rem !important;
+  line-height: 1.8 !important;
+}
+
+.card-title-ova {
+  font-family: var(--font-display) !important;
+  font-size: 1.5rem !important;
+  letter-spacing: 0.5px;
+}
+
+/* Activity cards */
+.activity-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.activity-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(94, 53, 177, 0.18) !important;
+}
+
+/* Nav buttons */
+.nav-btn-active {
+  background: linear-gradient(135deg, #5E35B1, #7E57C2) !important;
+  color: white !important;
+}
+
+/* Quiz styles */
+.option-btn {
+  font-size: 1rem !important;
+  margin-bottom: 8px;
+}
+
+.correct-answer {
+  background-color: #C8E6C9 !important;
+  border: 2px solid #43A047 !important;
+}
+
+.wrong-answer {
+  background-color: #FFCDD2 !important;
+  border: 2px solid #E53935 !important;
+}
+
+/* Progress bar */
+.progress-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #5E35B1;
+}
+
+/* Matching game */
+.match-card {
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 3px solid transparent;
+}
+.match-card:hover {
+  transform: scale(1.04);
+}
+.match-selected {
+  border: 3px solid #5E35B1 !important;
+  background: #EDE7F6 !important;
+}
+.match-correct {
+  border: 3px solid #43A047 !important;
+  background: #C8E6C9 !important;
+}
+.match-wrong {
+  border: 3px solid #E53935 !important;
+  background: #FFCDD2 !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #EDE7F6;
+}
+::-webkit-scrollbar-thumb {
+  background: #9575CD;
+  border-radius: 8px;
+}
+
+/* ===== ESTILOS GLOBALES ADICIONALES ===== */
+.v-application {
+  background: linear-gradient(135deg,#EDE7F6 0%,#F3E5F5 50%,#E8EAF6 100%) !important;
+  min-height: 100vh;
+}
+* { font-family: 'Nunito', sans-serif !important; }
+
+/* Botón flotante TTS */
+@keyframes pulso {
+  0%   { box-shadow: 0 0 0 0 rgba(229,57,53,.5); }
+  70%  { box-shadow: 0 0 0 14px rgba(229,57,53,0); }
+  100% { box-shadow: 0 0 0 0 rgba(229,57,53,0); }
+}
+.leyendo-pulso { animation: pulso 1.2s infinite; }
+
+/* Nav lateral activo */
+.elemento-activo { background: linear-gradient(135deg,#5E35B1,#7E57C2) !important; }
+.elemento-activo .v-icon,
+.elemento-activo .v-list-item-title { color: white !important; }
