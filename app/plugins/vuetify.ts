@@ -9,32 +9,32 @@ export default defineNuxtPlugin((app) => {
     components,
     directives,
     theme: {
-      defaultTheme: 'ovaTheme',
+      defaultTheme: 'greekTheme',
       themes: {
-        ovaTheme: {
+        greekTheme: {
           dark: false,
           colors: {
-            primary: '#5E35B1',
-            secondary: '#FF8F00',
-            accent: '#00ACC1',
-            success: '#43A047',
-            warning: '#FB8C00',
-            error: '#E53935',
-            info: '#039BE5',
-            background: '#F3E5F5',
-            surface: '#FFFFFF',
+            primary:    '#1B3A6B',
+            secondary:  '#C9A84C',
+            accent:     '#4A7FA5',
+            success:    '#5C6E2E',
+            warning:    '#C9A84C',
+            error:      '#8B3A2A',
+            info:       '#4A7FA5',
+            background: '#F8F4EC',
+            surface:    '#FDFAF3',
           },
         },
       },
     },
     defaults: {
       VBtn: {
-        rounded: 'xl',
+        rounded: 'lg',
         size: 'large',
       },
       VCard: {
-        rounded: 'xl',
-        elevation: 3,
+        rounded: 'lg',
+        elevation: 2,
       },
     },
   })

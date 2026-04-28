@@ -14,12 +14,15 @@ type HydrationStrategies = {
 type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }> & T
 
 
-export const NavegacionPaginas: typeof import("../app/components/NavegacionPaginas.vue")['default']
-export const TarjetaVideo: typeof import("../app/components/TarjetaVideo.vue")['default']
-export const VideoCard: typeof import("../app/components/VideoCard.vue")['default']
-export const VisualMatch: typeof import("../app/components/VisualMatch.vue")['default']
-export const VisualQuiz: typeof import("../app/components/VisualQuiz.vue")['default']
-export const VisualSequence: typeof import("../app/components/VisualSequence.vue")['default']
+export const CuestionarioVisual: typeof import("../app/componentes/CuestionarioVisual.vue")['default']
+export const EmparejamientoVisual: typeof import("../app/componentes/EmparejamientoVisual.vue")['default']
+export const NavegacionPaginas: typeof import("../app/componentes/NavegacionPaginas.vue")['default']
+export const SecuenciaVisual: typeof import("../app/componentes/SecuenciaVisual.vue")['default']
+export const TarjetaVideo: typeof import("../app/componentes/TarjetaVideo.vue")['default']
+export const TarjetaVideoAlt: typeof import("../app/componentes/TarjetaVideoAlt.vue")['default']
+export const BarraProgresoDetallada: typeof import("../app/components/BarraProgresoDetallada.vue")['default']
+export const PanelAccesibilidad: typeof import("../app/components/PanelAccesibilidad.vue")['default']
+export const PreguntasComprension: typeof import("../app/components/PreguntasComprension.vue")['default']
 export const NuxtWelcome: typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']
 export const NuxtLayout: typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
 export const NuxtErrorBoundary: typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
@@ -43,12 +46,15 @@ export const Head: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Html']
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
-export const LazyNavegacionPaginas: LazyComponent<typeof import("../app/components/NavegacionPaginas.vue")['default']>
-export const LazyTarjetaVideo: LazyComponent<typeof import("../app/components/TarjetaVideo.vue")['default']>
-export const LazyVideoCard: LazyComponent<typeof import("../app/components/VideoCard.vue")['default']>
-export const LazyVisualMatch: LazyComponent<typeof import("../app/components/VisualMatch.vue")['default']>
-export const LazyVisualQuiz: LazyComponent<typeof import("../app/components/VisualQuiz.vue")['default']>
-export const LazyVisualSequence: LazyComponent<typeof import("../app/components/VisualSequence.vue")['default']>
+export const LazyCuestionarioVisual: LazyComponent<typeof import("../app/componentes/CuestionarioVisual.vue")['default']>
+export const LazyEmparejamientoVisual: LazyComponent<typeof import("../app/componentes/EmparejamientoVisual.vue")['default']>
+export const LazyNavegacionPaginas: LazyComponent<typeof import("../app/componentes/NavegacionPaginas.vue")['default']>
+export const LazySecuenciaVisual: LazyComponent<typeof import("../app/componentes/SecuenciaVisual.vue")['default']>
+export const LazyTarjetaVideo: LazyComponent<typeof import("../app/componentes/TarjetaVideo.vue")['default']>
+export const LazyTarjetaVideoAlt: LazyComponent<typeof import("../app/componentes/TarjetaVideoAlt.vue")['default']>
+export const LazyBarraProgresoDetallada: LazyComponent<typeof import("../app/components/BarraProgresoDetallada.vue")['default']>
+export const LazyPanelAccesibilidad: LazyComponent<typeof import("../app/components/PanelAccesibilidad.vue")['default']>
+export const LazyPreguntasComprension: LazyComponent<typeof import("../app/components/PreguntasComprension.vue")['default']>
 export const LazyNuxtWelcome: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
 export const LazyNuxtLayout: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
 export const LazyNuxtErrorBoundary: LazyComponent<typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>

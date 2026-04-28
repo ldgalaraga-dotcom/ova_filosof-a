@@ -1,6 +1,23 @@
+/* ===== GREEK PHILOSOPHY DESIGN SYSTEM ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
 :root {
-  --font-display: 'Fredoka One', cursive;
-  --font-body: 'Nunito', sans-serif;
+  --font-display: 'Cinzel', 'Times New Roman', serif;
+  --font-display-deco: 'Cinzel Decorative', serif;
+  --font-body: 'EB Garamond', 'Georgia', serif;
+
+  /* Greek color palette */
+  --color-aegean:      #1B3A6B;
+  --color-gold:        #C9A84C;
+  --color-gold-light:  #E8C97A;
+  --color-marble:      #F8F4EC;
+  --color-parchment:   #EEE8D8;
+  --color-terracotta:  #8B3A2A;
+  --color-olive:       #5C6E2E;
+  --color-ink:         #2C2416;
+  --color-stone:       #8C7E6A;
+  --color-sky:         #4A7FA5;
+  --color-surface:     #FDFAF3;
 }
 
 * {
@@ -9,113 +26,192 @@
 
 .display-font {
   font-family: var(--font-display) !important;
+  letter-spacing: 0.08em;
 }
 
 .v-application {
-  background: linear-gradient(135deg, #EDE7F6 0%, #F3E5F5 50%, #E8EAF6 100%) !important;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(201,168,76,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(74,127,165,0.07) 0%, transparent 50%),
+    linear-gradient(160deg, #F8F4EC 0%, #F2ECD8 40%, #EDE8DA 100%) !important;
   min-height: 100vh;
 }
 
-/* Accessibility: large readable text */
 .body-text {
   font-size: 1.1rem !important;
-  line-height: 1.8 !important;
+  line-height: 1.9 !important;
+  color: var(--color-ink) !important;
 }
 
 .card-title-ova {
   font-family: var(--font-display) !important;
-  font-size: 1.5rem !important;
-  letter-spacing: 0.5px;
+  font-size: 1.35rem !important;
+  letter-spacing: 0.07em;
+  color: var(--color-aegean) !important;
 }
 
-/* Activity cards */
 .activity-card {
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.25s, box-shadow 0.25s;
+  border: 1px solid rgba(201,168,76,0.25) !important;
+  background: var(--color-surface) !important;
 }
 .activity-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(94, 53, 177, 0.18) !important;
+  transform: translateY(-5px);
+  box-shadow: 0 14px 36px rgba(27,58,107,0.16), 0 0 0 2px rgba(201,168,76,0.4) !important;
 }
 
-/* Nav buttons */
 .nav-btn-active {
-  background: linear-gradient(135deg, #5E35B1, #7E57C2) !important;
-  color: white !important;
+  background: linear-gradient(135deg, var(--color-aegean), var(--color-sky)) !important;
+  color: var(--color-gold-light) !important;
 }
 
-/* Quiz styles */
 .option-btn {
   font-size: 1rem !important;
   margin-bottom: 8px;
+  letter-spacing: 0.03em;
 }
 
 .correct-answer {
-  background-color: #C8E6C9 !important;
-  border: 2px solid #43A047 !important;
+  background-color: #D7EDD5 !important;
+  border: 2px solid var(--color-olive) !important;
 }
 
 .wrong-answer {
-  background-color: #FFCDD2 !important;
-  border: 2px solid #E53935 !important;
+  background-color: #F5D9D4 !important;
+  border: 2px solid var(--color-terracotta) !important;
 }
 
-/* Progress bar */
 .progress-label {
   font-size: 0.85rem;
-  font-weight: 700;
-  color: #5E35B1;
+  font-weight: 600;
+  color: var(--color-aegean);
+  font-family: var(--font-display) !important;
+  letter-spacing: 0.05em;
 }
 
-/* Matching game */
 .match-card {
   cursor: pointer;
   transition: all 0.2s;
-  border: 3px solid transparent;
+  border: 2px solid rgba(201,168,76,0.3) !important;
 }
 .match-card:hover {
   transform: scale(1.04);
+  border-color: var(--color-gold) !important;
 }
 .match-selected {
-  border: 3px solid #5E35B1 !important;
-  background: #EDE7F6 !important;
+  border: 2px solid var(--color-aegean) !important;
+  background: rgba(27,58,107,0.06) !important;
 }
 .match-correct {
-  border: 3px solid #43A047 !important;
-  background: #C8E6C9 !important;
+  border: 2px solid var(--color-olive) !important;
+  background: #D7EDD5 !important;
 }
 .match-wrong {
-  border: 3px solid #E53935 !important;
-  background: #FFCDD2 !important;
+  border: 2px solid var(--color-terracotta) !important;
+  background: #F5D9D4 !important;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #EDE7F6;
-}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-parchment); }
 ::-webkit-scrollbar-thumb {
-  background: #9575CD;
-  border-radius: 8px;
+  background: linear-gradient(180deg, var(--color-gold), var(--color-stone));
+  border-radius: 4px;
 }
 
-/* ===== ESTILOS GLOBALES ADICIONALES ===== */
-.v-application {
-  background: linear-gradient(135deg,#EDE7F6 0%,#F3E5F5 50%,#E8EAF6 100%) !important;
-  min-height: 100vh;
-}
-* { font-family: 'Nunito', sans-serif !important; }
-
-/* Botón flotante TTS */
 @keyframes pulso {
-  0%   { box-shadow: 0 0 0 0 rgba(229,57,53,.5); }
-  70%  { box-shadow: 0 0 0 14px rgba(229,57,53,0); }
-  100% { box-shadow: 0 0 0 0 rgba(229,57,53,0); }
+  0%   { box-shadow: 0 0 0 0 rgba(139,58,42,0.5); }
+  70%  { box-shadow: 0 0 0 14px rgba(139,58,42,0); }
+  100% { box-shadow: 0 0 0 0 rgba(139,58,42,0); }
 }
 .leyendo-pulso { animation: pulso 1.2s infinite; }
 
-/* Nav lateral activo */
-.elemento-activo { background: linear-gradient(135deg,#5E35B1,#7E57C2) !important; }
+.elemento-nav { color: var(--color-ink) !important; transition: background 0.2s; }
+.elemento-activo {
+  background: linear-gradient(135deg, var(--color-aegean), var(--color-sky)) !important;
+}
 .elemento-activo .v-icon,
-.elemento-activo .v-list-item-title { color: white !important; }
+.elemento-activo .v-list-item-title {
+  color: var(--color-gold-light) !important;
+}
+
+.page-title-greek {
+  font-family: var(--font-display) !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.greek-panel {
+  background: var(--color-surface) !important;
+  border: 1px solid rgba(201,168,76,0.35) !important;
+  border-top: 3px solid var(--color-gold) !important;
+}
+
+a {
+  color: var(--color-aegean) !important;
+}
+a:hover {
+  color: var(--color-gold) !important;
+}
+
+/* ===== MODO OSCURO ===== */
+.dark-mode .v-application {
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(201,168,76,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(74,127,165,0.05) 0%, transparent 50%),
+    linear-gradient(160deg, #16120E 0%, #1A1510 40%, #1E1A14 100%) !important;
+}
+
+.dark-mode .greek-panel {
+  background: #1E1A14 !important;
+  border-color: rgba(201,168,76,0.25) !important;
+}
+
+.dark-mode .activity-card {
+  background: #252118 !important;
+  border-color: rgba(201,168,76,0.2) !important;
+}
+
+.dark-mode .logro-obtenido {
+  background: linear-gradient(135deg, #252118, #1E1A14) !important;
+}
+
+.dark-mode .logro-bloqueado {
+  background: #1A1612 !important;
+}
+
+.dark-mode .logro-badge-nombre {
+  color: #C9A84C !important;
+}
+
+.dark-mode .card-title-ova {
+  color: #C9A84C !important;
+}
+
+.dark-mode a {
+  color: #6FA3C8 !important;
+}
+.dark-mode a:hover {
+  color: #C9A84C !important;
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+  background: #1A1612;
+}
+
+.dark-mode .body-text {
+  color: #E8E0D0 !important;
+}
+
+.dark-mode .match-selected {
+  background: rgba(201,168,76,0.1) !important;
+}
+
+.dark-mode .correct-answer {
+  background-color: #1E2E1A !important;
+  border-color: #5C8E2E !important;
+}
+
+.dark-mode .wrong-answer {
+  background-color: #2E1A18 !important;
+  border-color: #A05040 !important;
+}

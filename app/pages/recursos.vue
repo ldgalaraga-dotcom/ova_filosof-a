@@ -3,7 +3,7 @@
     <div class="d-flex align-center mb-5">
       <v-icon color="accent" size="38" class="mr-3">mdi-bookshelf</v-icon>
       <div>
-        <h1 style="font-family:'Fredoka One',cursive;font-size:1.9rem;color:#00838F;line-height:1.1">Recursos</h1>
+        <h1 style="font-family:'Cinzel',serif;font-size:1.9rem;color:#00838F;line-height:1.1">Recursos</h1>
         <div style="color:#888;font-size:0.95rem">Material extra para seguir aprendiendo 📚</div>
       </div>
     </div>
@@ -12,7 +12,7 @@
     <v-card rounded="xl" elevation="3" class="mb-5">
       <v-card-title class="pa-5 pb-2">
         <v-icon color="primary" class="mr-2">mdi-timeline-clock</v-icon>
-        <span style="font-family:'Fredoka One',cursive">Grandes Filósofos</span>
+        <span style="font-family:'Cinzel',serif">Grandes Filósofos</span>
       </v-card-title>
       <v-card-text class="pa-5 pt-2">
         <div v-for="(fil, i) in filosofos" :key="fil.nombre" class="d-flex align-start mb-4">
@@ -38,13 +38,13 @@
     <v-card rounded="xl" elevation="3" class="mb-5">
       <v-card-title class="pa-5 pb-2">
         <v-icon color="secondary" class="mr-2">mdi-book-alphabet</v-icon>
-        <span style="font-family:'Fredoka One',cursive">Glosario Filosófico</span>
+        <span style="font-family:'Cinzel',serif">Glosario Filosófico</span>
       </v-card-title>
       <v-card-text class="pa-5 pt-2">
         <v-row>
           <v-col v-for="termino in glosario" :key="termino.palabra" cols="12" sm="6" md="4">
-            <div class="pa-3 rounded-xl" style="background:#EDE7F6;border-left:4px solid #7E57C2;margin-bottom:8px">
-              <div style="font-weight:800;color:#5E35B1;font-size:0.95rem">{{ termino.palabra }}</div>
+            <div class="pa-3 rounded-xl" style="background:#EEE8D8;border-left:4px solid #7E57C2;margin-bottom:8px">
+              <div style="font-weight:800;color:#1B3A6B;font-size:0.95rem">{{ termino.palabra }}</div>
               <div style="font-size:0.88rem;color:#555;line-height:1.5;margin-top:3px">{{ termino.definicion }}</div>
             </div>
           </v-col>
@@ -58,10 +58,10 @@
         <v-card rounded="xl" elevation="3" class="h-100">
           <v-card-title class="pa-5 pb-2">
             <v-icon color="primary" class="mr-2">mdi-book-open</v-icon>
-            <span style="font-family:'Fredoka One',cursive">Libros</span>
+            <span style="font-family:'Cinzel',serif">Libros</span>
           </v-card-title>
           <v-card-text class="pa-5 pt-2">
-            <div v-for="libro in libros" :key="libro.titulo" class="d-flex align-start mb-3 pa-3 rounded-xl" style="background:#EDE7F6">
+            <div v-for="libro in libros" :key="libro.titulo" class="d-flex align-start mb-3 pa-3 rounded-xl" style="background:#EEE8D8">
               <span style="font-size:1.6rem;margin-right:10px">{{ libro.emoji }}</span>
               <div>
                 <div style="font-weight:800;font-size:0.93rem;color:#333">{{ libro.titulo }}</div>
@@ -75,7 +75,7 @@
         <v-card rounded="xl" elevation="3" class="h-100">
           <v-card-title class="pa-5 pb-2">
             <v-icon color="error" class="mr-2">mdi-youtube</v-icon>
-            <span style="font-family:'Fredoka One',cursive">Videos Extra</span>
+            <span style="font-family:'Cinzel',serif">Videos Extra</span>
           </v-card-title>
           <v-card-text class="pa-5 pt-2">
             <div v-for="vid in videosExtra" :key="vid.titulo" class="d-flex align-start mb-3 pa-3 rounded-xl" style="background:#FFEBEE">
@@ -96,6 +96,7 @@
 
 <script setup lang="ts">
 import { useOvaStore } from '~/stores/ova'
+import NavegacionPaginas from '~/componentes/NavegacionPaginas.vue'
 const tienda = useOvaStore()
 onMounted(() => tienda.markPageVisited('recursos'))
 

@@ -14,12 +14,15 @@ type HydrationStrategies = {
 type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }> & T
 
 interface _GlobalComponents {
-  NavegacionPaginas: typeof import("../../app/components/NavegacionPaginas.vue")['default']
-  TarjetaVideo: typeof import("../../app/components/TarjetaVideo.vue")['default']
-  VideoCard: typeof import("../../app/components/VideoCard.vue")['default']
-  VisualMatch: typeof import("../../app/components/VisualMatch.vue")['default']
-  VisualQuiz: typeof import("../../app/components/VisualQuiz.vue")['default']
-  VisualSequence: typeof import("../../app/components/VisualSequence.vue")['default']
+  CuestionarioVisual: typeof import("../../app/componentes/CuestionarioVisual.vue")['default']
+  EmparejamientoVisual: typeof import("../../app/componentes/EmparejamientoVisual.vue")['default']
+  NavegacionPaginas: typeof import("../../app/componentes/NavegacionPaginas.vue")['default']
+  SecuenciaVisual: typeof import("../../app/componentes/SecuenciaVisual.vue")['default']
+  TarjetaVideo: typeof import("../../app/componentes/TarjetaVideo.vue")['default']
+  TarjetaVideoAlt: typeof import("../../app/componentes/TarjetaVideoAlt.vue")['default']
+  BarraProgresoDetallada: typeof import("../../app/components/BarraProgresoDetallada.vue")['default']
+  PanelAccesibilidad: typeof import("../../app/components/PanelAccesibilidad.vue")['default']
+  PreguntasComprension: typeof import("../../app/components/PreguntasComprension.vue")['default']
   NuxtWelcome: typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']
   NuxtLayout: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
   NuxtErrorBoundary: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
@@ -43,12 +46,15 @@ interface _GlobalComponents {
   Html: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Html']
   Body: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Body']
   NuxtIsland: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-island")['default']
-  LazyNavegacionPaginas: LazyComponent<typeof import("../../app/components/NavegacionPaginas.vue")['default']>
-  LazyTarjetaVideo: LazyComponent<typeof import("../../app/components/TarjetaVideo.vue")['default']>
-  LazyVideoCard: LazyComponent<typeof import("../../app/components/VideoCard.vue")['default']>
-  LazyVisualMatch: LazyComponent<typeof import("../../app/components/VisualMatch.vue")['default']>
-  LazyVisualQuiz: LazyComponent<typeof import("../../app/components/VisualQuiz.vue")['default']>
-  LazyVisualSequence: LazyComponent<typeof import("../../app/components/VisualSequence.vue")['default']>
+  LazyCuestionarioVisual: LazyComponent<typeof import("../../app/componentes/CuestionarioVisual.vue")['default']>
+  LazyEmparejamientoVisual: LazyComponent<typeof import("../../app/componentes/EmparejamientoVisual.vue")['default']>
+  LazyNavegacionPaginas: LazyComponent<typeof import("../../app/componentes/NavegacionPaginas.vue")['default']>
+  LazySecuenciaVisual: LazyComponent<typeof import("../../app/componentes/SecuenciaVisual.vue")['default']>
+  LazyTarjetaVideo: LazyComponent<typeof import("../../app/componentes/TarjetaVideo.vue")['default']>
+  LazyTarjetaVideoAlt: LazyComponent<typeof import("../../app/componentes/TarjetaVideoAlt.vue")['default']>
+  LazyBarraProgresoDetallada: LazyComponent<typeof import("../../app/components/BarraProgresoDetallada.vue")['default']>
+  LazyPanelAccesibilidad: LazyComponent<typeof import("../../app/components/PanelAccesibilidad.vue")['default']>
+  LazyPreguntasComprension: LazyComponent<typeof import("../../app/components/PreguntasComprension.vue")['default']>
   LazyNuxtWelcome: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
   LazyNuxtLayout: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
   LazyNuxtErrorBoundary: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>

@@ -30,7 +30,9 @@ export { requestIdleCallback, cancelIdleCallback } from '#app/compat/idle-callba
 export { setInterval } from '#app/compat/interval';
 export { definePageMeta } from '../node_modules/nuxt/dist/pages/runtime/composables';
 export { defineLazyHydrationComponent } from '#app/composables/lazy-hydration';
+export { useAccessibility } from '../app/composables/useAccessibility';
 export { useTextToSpeech } from '../app/composables/useTextToSpeech';
-export { useOvaStore } from '../app/stores/ova';
+export { useOvaStore, Logro } from '../app/stores/ova';
 export { defineStore, acceptHMRUpdate, usePinia, storeToRefs } from '../node_modules/@pinia/nuxt/dist/runtime/composables';
-export { useNuxtDevTools } from '../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';
+export { persistedState } from '../node_modules/@pinia-plugin-persistedstate/nuxt/dist/runtime/storages';
+export { useDate, useLocale, useDefaults, useDisplay, useLayout, useRtl, useTheme, useGoTo, useHotkey, useMask } from 'vuetify';

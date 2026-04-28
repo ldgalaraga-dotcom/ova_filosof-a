@@ -1,41 +1,35 @@
-import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2026-04-26',
-  srcDir: 'app/',
-  build: {
-    transpile: ['vuetify'],
-  },
+  compatibilityDate: '2024-04-03',
+  devtools: { enabled: false },
+  srcDir: 'app',
+
+  // Registrar la carpeta 'componentes' (en español) para auto-import
+  components: [
+    { path: '~/componentes', pathPrefix: false },
+    '~/components',
+  ],
+
+  // Módulos
   modules: [
     '@pinia/nuxt',
-    (_options, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', (config) => {
-        config.plugins.push(vuetify({ autoImport: true }))
-      })
-    },
+    '@pinia-plugin-persistedstate/nuxt',
+    'vuetify-nuxt-module',
   ],
-  vite: {
-    vue: {
-      template: {
-        transformAssetUrls,
-      },
-    },
-    define: {
-      'process.env.DEBUG': false,
-    },
-  },
-  css: ['~/assets/main.css'],
+
+  // Página de error personalizada
   app: {
     head: {
-      title: 'OVA Filosofía para Todos',
+      title: 'Φιλοσοφία para Todos – OVA',
       meta: [
-        { name: 'description', content: 'Objeto Virtual de Aprendizaje de Filosofía para grados 10 y 11' },
+        { name: 'description', content: 'Objeto Virtual de Aprendizaje de Filosofía para grados X y XI' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       ],
       link: [
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap' },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap',
+        },
       ],
     },
   },
