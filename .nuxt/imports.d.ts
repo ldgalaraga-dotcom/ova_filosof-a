@@ -36,3 +36,4 @@ export { useOvaStore, Logro } from '../app/stores/ova';
 export { defineStore, acceptHMRUpdate, usePinia, storeToRefs } from '../node_modules/@pinia/nuxt/dist/runtime/composables';
 export { persistedState } from '../node_modules/@pinia-plugin-persistedstate/nuxt/dist/runtime/storages';
 export { useDate, useLocale, useDefaults, useDisplay, useLayout, useRtl, useTheme, useGoTo, useHotkey, useMask } from 'vuetify';
+export { usePWA, useTransparentPwaIcon, useMaskablePwaIcon, useFaviconPwaIcon, useApplePwaIcon, useAppleSplashScreenPwaIcon } from '../node_modules/@vite-pwa/nuxt/dist/runtime/composables/index';

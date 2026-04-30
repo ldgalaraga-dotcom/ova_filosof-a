@@ -17,7 +17,7 @@
     <v-card-text class="pa-4">
       <!-- Title -->
       <div class="d-flex align-start justify-space-between mb-2">
-        <h3 class="display-font" style="font-size: 1.1rem; color: #1B3A6B; flex: 1;">
+        <h3 class="display-font" style="font-size: 1.1rem; color:var(--text-primary); flex: 1;">
           {{ video.titulo }}
         </h3>
         <v-chip
@@ -32,7 +32,7 @@
       </div>
 
       <!-- Description -->
-      <p style="color: #666; font-size: 0.95rem; line-height: 1.5; margin-bottom: 12px;">
+      <p style="color:var(--text-muted); font-size: 0.95rem; line-height: 1.5; margin-bottom: 12px;">
         {{ video.descripcion }}
       </p>
 

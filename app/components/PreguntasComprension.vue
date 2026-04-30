@@ -2,7 +2,7 @@
   <v-dialog v-model="mostrarPreguntas" max-width="600">
     <v-card rounded="lg" elevation="3">
       <!-- Encabezado -->
-      <div style="background:linear-gradient(135deg,#1B3A6B,#2A5298);padding:20px;border-radius:8px 8px 0 0">
+      <div style="background:linear-gradient(135deg,#1B3A6B,#122440);padding:20px;border-radius:8px 8px 0 0">
         <div class="d-flex align-center gap-2 mb-2">
           <v-icon color="secondary" size="large">mdi-lightbulb-on</v-icon>
           <span style="font-family:'Cinzel',serif;font-size:1.1rem;color:#E8C97A;letter-spacing:0.06em;font-weight:700">
@@ -17,14 +17,14 @@
       <v-card-text class="pa-6">
         <div v-if="preguntas.length > 0" class="mb-6">
           <!-- Número de pregunta -->
-          <div style="font-family:'Cinzel',serif;font-size:0.85rem;color:#1B3A6B;margin-bottom:8px;letter-spacing:0.05em">
+          <div style="font-family:'Cinzel',serif;font-size:0.85rem;color:var(--text-primary);margin-bottom:8px;letter-spacing:0.05em">
             Pregunta {{ preguntaActual + 1 }} de {{ preguntas.length }}
           </div>
 
           <!-- Pregunta -->
           <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:16px">
-            <span style="font-size:1.6rem">{{ preguntas[preguntaActual].emoji }}</span>
-            <div style="font-family:'EB Garamond',serif;font-size:1.05rem;font-weight:600;color:#2C2416;line-height:1.6">
+            <v-icon color="#C9A84C" size="32">{{ preguntas[preguntaActual].icon }}</v-icon>
+            <div style="font-family:'EB Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--text-dark);line-height:1.6">
               {{ preguntas[preguntaActual].pregunta }}
             </div>
           </div>
@@ -50,7 +50,7 @@
                     :value="idx"
                     :color="respuestaActual === idx ? (idx === preguntas[preguntaActual].correcto ? 'success' : 'error') : 'primary'"
                   />
-                  <div style="font-family:'EB Garamond',serif;font-size:0.95rem;color:#2C2416">
+                  <div style="font-family:'EB Garamond',serif;font-size:0.95rem;color:var(--text-dark)">
                     {{ opcion }}
                   </div>
                 </div>
@@ -64,7 +64,7 @@
               background: respuestaActual === preguntas[preguntaActual].correcto ? '#D7EDD5' : '#F5D9D4',
               borderLeft: '4px solid ' + (respuestaActual === preguntas[preguntaActual].correcto ? '#5C6E2E' : '#8B3A2A'),
             }">
-            <div style="font-family:'EB Garamond',serif;font-size:0.95rem;color:#2C2416;line-height:1.5">
+            <div style="font-family:'EB Garamond',serif;font-size:0.95rem;color:var(--text-dark);line-height:1.5">
               {{ preguntas[preguntaActual].explicacion[respuestaActual] }}
             </div>
           </div>
@@ -121,7 +121,7 @@
 import { useOvaStore } from '~/stores/ova'
 
 interface PreguntaComprension {
-  emoji: string
+  icon: string
   subtitulo: string
   pregunta: string
   opciones: string[]

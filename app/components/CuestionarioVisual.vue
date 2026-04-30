@@ -3,11 +3,11 @@
     <v-card-text class="pa-6">
       <!-- Title -->
       <div class="text-center mb-6">
-        <div style="font-size: 4rem; margin-bottom: 12px;">{{ question.emoji }}</div>
-        <h2 class="display-font" style="font-size: 1.8rem; color: #1B3A6B; margin-bottom: 4px;">
+        <div style="margin-bottom: 12px; color: #C9A84C"><v-icon size="80">{{ question.icon }}</v-icon></div>
+        <h2 class="display-font" style="font-size: 1.8rem; color:var(--text-primary); margin-bottom: 4px;">
           {{ question.question }}
         </h2>
-        <p style="color: #999; font-size: 0.95rem;">Pregunta {{ currentQuestion + 1 }}/{{ total }}</p>
+        <p style="color:var(--text-muted); font-size: 0.95rem;">Pregunta {{ currentQuestion + 1 }}/{{ total }}</p>
       </div>
 
       <!-- Options -->
@@ -27,8 +27,8 @@
             style="cursor: pointer; transition: all 0.3s ease;"
           >
             <v-card-text class="pa-4 text-center">
-              <div style="font-size: 3.5rem; margin-bottom: 12px;">{{ option.emoji }}</div>
-              <div style="font-size: 1.1rem; font-weight: 700; color: #333;">
+              <div style="margin-bottom: 12px; color: #1B3A6B"><v-icon size="64">{{ option.icon }}</v-icon></div>
+              <div style="font-size: 1.1rem; font-weight: 700; color:var(--text-dark);">
                 {{ option.text }}
               </div>
             </v-card-text>
@@ -150,12 +150,12 @@ const complete = () => {
 }
 
 .option-card:hover {
-  border-color: #1B3A6B;
+  border-color:var(--text-primary);
   transform: scale(1.05);
 }
 
 .option-card.selected {
-  border-color: #1B3A6B;
+  border-color:var(--text-primary);
   background-color: #ede7f6;
 }
 

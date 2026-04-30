@@ -4,26 +4,53 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   srcDir: 'app',
 
-  // Registrar la carpeta 'componentes' (en español) para auto-import
-  components: [
-    { path: '~/componentes', pathPrefix: false },
-    '~/components',
-  ],
-
-  // Módulos
   modules: [
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     'vuetify-nuxt-module',
+    '@vite-pwa/nuxt',
   ],
+  pwa: {
+    registerType: 'autoUpdate',
+    manifest: {
+      name: 'Ágora - Filosofía para Todos',
+      short_name: 'Ágora',
+      description: 'Objeto Virtual de Aprendizaje de Filosofía para grados X y XI',
+      theme_color: '#1B3A6B',
+      background_color: '#F8F4EC',
+      icons: [
+        {
+          src: '/img/agora.png',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          src: '/img/agora.png',
+          sizes: '512x512',
+          type: 'image/png'
+        }
+      ]
+    },
+    workbox: {
+      navigateFallback: '/',
+    },
+    devOptions: {
+      enabled: true,
+      type: 'module'
+    }
+  },
 
-  // Página de error personalizada
   app: {
     head: {
-      title: 'Φιλοσοφία para Todos – OVA',
+      htmlAttrs: {
+        lang: 'es',
+      },
+      title: 'Ágora — Filosofía para Todos · OVA',
       meta: [
-        { name: 'description', content: 'Objeto Virtual de Aprendizaje de Filosofía para grados X y XI' },
+        { charset: 'utf-8' },
+        { name: 'description', content: 'Objeto Virtual de Aprendizaje de Filosofía para grados X y XI. Explora los fundamentos del pensamiento filosófico.' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'theme-color', content: '#1B3A6B' },
       ],
       link: [
         {

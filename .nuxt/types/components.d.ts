@@ -14,15 +14,15 @@ type HydrationStrategies = {
 type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }> & T
 
 interface _GlobalComponents {
-  CuestionarioVisual: typeof import("../../app/componentes/CuestionarioVisual.vue")['default']
-  EmparejamientoVisual: typeof import("../../app/componentes/EmparejamientoVisual.vue")['default']
-  NavegacionPaginas: typeof import("../../app/componentes/NavegacionPaginas.vue")['default']
-  SecuenciaVisual: typeof import("../../app/componentes/SecuenciaVisual.vue")['default']
-  TarjetaVideo: typeof import("../../app/componentes/TarjetaVideo.vue")['default']
-  TarjetaVideoAlt: typeof import("../../app/componentes/TarjetaVideoAlt.vue")['default']
   BarraProgresoDetallada: typeof import("../../app/components/BarraProgresoDetallada.vue")['default']
+  CuestionarioVisual: typeof import("../../app/components/CuestionarioVisual.vue")['default']
+  EmparejamientoVisual: typeof import("../../app/components/EmparejamientoVisual.vue")['default']
+  NavegacionPaginas: typeof import("../../app/components/NavegacionPaginas.vue")['default']
   PanelAccesibilidad: typeof import("../../app/components/PanelAccesibilidad.vue")['default']
   PreguntasComprension: typeof import("../../app/components/PreguntasComprension.vue")['default']
+  SecuenciaVisual: typeof import("../../app/components/SecuenciaVisual.vue")['default']
+  TarjetaVideo: typeof import("../../app/components/TarjetaVideo.vue")['default']
+  TarjetaVideoAlt: typeof import("../../app/components/TarjetaVideoAlt.vue")['default']
   NuxtWelcome: typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']
   NuxtLayout: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
   NuxtErrorBoundary: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
@@ -35,6 +35,14 @@ interface _GlobalComponents {
   NuxtRouteAnnouncer: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-route-announcer")['default']
   NuxtImg: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtImg']
   NuxtPicture: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtPicture']
+  VitePwaManifest: typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/VitePwaManifest")['default']
+  NuxtPwaManifest: typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/VitePwaManifest")['default']
+  NuxtPwaAssets: typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/NuxtPwaAssets")['default']
+  PwaAppleImage: typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/PwaAppleImage.vue")['default']
+  PwaAppleSplashScreenImage: typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/PwaAppleSplashScreenImage.vue")['default']
+  PwaFaviconImage: typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/PwaFaviconImage.vue")['default']
+  PwaMaskableImage: typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/PwaMaskableImage.vue")['default']
+  PwaTransparentImage: typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/PwaTransparentImage.vue")['default']
   NuxtPage: typeof import("../../node_modules/nuxt/dist/pages/runtime/page")['default']
   NoScript: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['NoScript']
   Link: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Link']
@@ -46,15 +54,15 @@ interface _GlobalComponents {
   Html: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Html']
   Body: typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Body']
   NuxtIsland: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-island")['default']
-  LazyCuestionarioVisual: LazyComponent<typeof import("../../app/componentes/CuestionarioVisual.vue")['default']>
-  LazyEmparejamientoVisual: LazyComponent<typeof import("../../app/componentes/EmparejamientoVisual.vue")['default']>
-  LazyNavegacionPaginas: LazyComponent<typeof import("../../app/componentes/NavegacionPaginas.vue")['default']>
-  LazySecuenciaVisual: LazyComponent<typeof import("../../app/componentes/SecuenciaVisual.vue")['default']>
-  LazyTarjetaVideo: LazyComponent<typeof import("../../app/componentes/TarjetaVideo.vue")['default']>
-  LazyTarjetaVideoAlt: LazyComponent<typeof import("../../app/componentes/TarjetaVideoAlt.vue")['default']>
   LazyBarraProgresoDetallada: LazyComponent<typeof import("../../app/components/BarraProgresoDetallada.vue")['default']>
+  LazyCuestionarioVisual: LazyComponent<typeof import("../../app/components/CuestionarioVisual.vue")['default']>
+  LazyEmparejamientoVisual: LazyComponent<typeof import("../../app/components/EmparejamientoVisual.vue")['default']>
+  LazyNavegacionPaginas: LazyComponent<typeof import("../../app/components/NavegacionPaginas.vue")['default']>
   LazyPanelAccesibilidad: LazyComponent<typeof import("../../app/components/PanelAccesibilidad.vue")['default']>
   LazyPreguntasComprension: LazyComponent<typeof import("../../app/components/PreguntasComprension.vue")['default']>
+  LazySecuenciaVisual: LazyComponent<typeof import("../../app/components/SecuenciaVisual.vue")['default']>
+  LazyTarjetaVideo: LazyComponent<typeof import("../../app/components/TarjetaVideo.vue")['default']>
+  LazyTarjetaVideoAlt: LazyComponent<typeof import("../../app/components/TarjetaVideoAlt.vue")['default']>
   LazyNuxtWelcome: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
   LazyNuxtLayout: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
   LazyNuxtErrorBoundary: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>
@@ -67,6 +75,14 @@ interface _GlobalComponents {
   LazyNuxtRouteAnnouncer: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-route-announcer")['default']>
   LazyNuxtImg: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtImg']>
   LazyNuxtPicture: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-stubs")['NuxtPicture']>
+  LazyVitePwaManifest: LazyComponent<typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/VitePwaManifest")['default']>
+  LazyNuxtPwaManifest: LazyComponent<typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/VitePwaManifest")['default']>
+  LazyNuxtPwaAssets: LazyComponent<typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/NuxtPwaAssets")['default']>
+  LazyPwaAppleImage: LazyComponent<typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/PwaAppleImage.vue")['default']>
+  LazyPwaAppleSplashScreenImage: LazyComponent<typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/PwaAppleSplashScreenImage.vue")['default']>
+  LazyPwaFaviconImage: LazyComponent<typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/PwaFaviconImage.vue")['default']>
+  LazyPwaMaskableImage: LazyComponent<typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/PwaMaskableImage.vue")['default']>
+  LazyPwaTransparentImage: LazyComponent<typeof import("../../node_modules/@vite-pwa/nuxt/dist/runtime/components/PwaTransparentImage.vue")['default']>
   LazyNuxtPage: LazyComponent<typeof import("../../node_modules/nuxt/dist/pages/runtime/page")['default']>
   LazyNoScript: LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['NoScript']>
   LazyLink: LazyComponent<typeof import("../../node_modules/nuxt/dist/head/runtime/components")['Link']>

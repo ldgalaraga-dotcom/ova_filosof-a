@@ -1,0 +1,25 @@
+{
+  "name": "ova-filosofia",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
+    "@pinia/nuxt": "^0.10.0",
+    "nuxt": "^3.15.0",
+    "pinia": "^3.0.1",
+    "vue": "^3.5.13",
+    "vuetify": "^3.8.0",
+    "vuetify-nuxt-module": "^0.19.5"
+  },
+  "devDependencies": {
+    "vite-plugin-vuetify": "^2.1.0"
+  }
+}

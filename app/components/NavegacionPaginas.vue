@@ -38,7 +38,7 @@
         rounded="lg"
         size="large"
         append-icon="mdi-arrow-right"
-        style="font-family:'Cinzel',serif;letter-spacing:0.07em;text-transform:uppercase;font-size:0.8rem;background:linear-gradient(135deg,#1B3A6B,#4A7FA5)"
+        style="font-family:'Cinzel',serif;letter-spacing:0.07em;text-transform:uppercase;font-size:0.8rem;background:linear-gradient(135deg,#1B3A6B,#1B3A6B)"
       >
         {{ paginaSiguiente.etiqueta }}
       </v-btn>
@@ -53,8 +53,9 @@ const enrutador = useRouter()
 const paginas = [
   { ruta: '/contenido',   etiqueta: 'Contenido' },
   { ruta: '/actividades', etiqueta: 'Actividades' },
-  { ruta: '/evaluacion',  etiqueta: 'Evaluación' },
+  { ruta: '/reflexiones', etiqueta: 'Reflexiones' },
   { ruta: '/recursos',    etiqueta: 'Recursos' },
+  { ruta: '/evaluacion',  etiqueta: 'Evaluación' },
   { ruta: '/creditos',    etiqueta: 'Créditos' },
 ]
 
@@ -83,5 +84,5 @@ function ir(destino: string) {
   transition: all 0.2s;
 }
 .dot-nav:hover { background: #C9A84C; transform: scale(1.2); }
-.dot-activo { background: #1B3A6B; transform: scale(1.3); border-color: #1B3A6B; }
+.dot-activo { background: #1B3A6B; transform: scale(1.3); border-color:var(--text-primary); }
 </style>

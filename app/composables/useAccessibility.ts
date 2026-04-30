@@ -1,3 +1,4 @@
+import { computed, onMounted, watch } from 'vue'
 import { useOvaStore } from '~/stores/ova'
 
 export const useAccessibility = () => {

@@ -1,8 +1,8 @@
 <template>
   <v-card rounded="lg" elevation="2" class="pa-4">
     <div class="mb-4">
-      <div style="font-family:'Cinzel',serif;font-weight:700;color:#1B3A6B;margin-bottom:8px;letter-spacing:0.05em">
-        ♿ Accesibilidad
+      <div style="font-family:'Cinzel',serif;font-weight:700;color:var(--text-primary);margin-bottom:8px;letter-spacing:0.05em">
+        <v-icon size="18" color="primary" class="mr-1">mdi-accessibility</v-icon> Accesibilidad
       </div>
     </div>
 
@@ -81,8 +81,8 @@
 
     <!-- Información -->
     <div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(201,168,76,0.2)">
-      <div style="font-family:'EB Garamond',serif;font-size:0.82rem;color:#8C7E6A;font-style:italic">
-        💡 Estos controles se guardan automáticamente y se aplican en todas las páginas.
+      <div style="font-family:'EB Garamond',serif;font-size:0.82rem;color:var(--text-muted);font-style:italic">
+        <v-icon size="14" class="mr-1">mdi-lightbulb-on</v-icon> Estos controles se guardan automáticamente y se aplican en todas las páginas.
       </div>
     </div>
   </v-card>

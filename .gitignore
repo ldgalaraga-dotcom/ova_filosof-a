@@ -34,3 +34,7 @@ Thumbs.db
 
 # Build
 .cache/
+
+# Temp files
+*.zip
+fix-colors.js

@@ -1,11 +1,13 @@
 <template>
   <div class="error-root">
     <div class="fondo-deco" aria-hidden="true">
-      <div class="columna c1">🏛</div>
-      <div class="columna c2">🏛</div>
+      <div class="columna c1"><v-icon size="128">mdi-pillar</v-icon></div>
+      <div class="columna c2"><v-icon size="128">mdi-pillar</v-icon></div>
     </div>
     <div class="contenido">
-      <div class="medallon">🦉</div>
+      <div class="medallon">
+        <img src="/img/agora.png" alt="Ágora" style="width:100%;height:100%;object-fit:contain;border-radius:50%;" />
+      </div>
       <div class="codigo">404</div>
       <h1 class="titulo">Página no encontrada</h1>
       <p class="desc">
@@ -17,8 +19,8 @@
         <span class="sep-sym">✦</span>
         <span class="sep-linea"></span>
       </div>
-      <button class="btn-volver" @click="navigateTo('/contenido')">
-        🏛 Volver al Ágora
+      <button class="btn-volver d-flex align-center justify-center mx-auto" @click="navigateTo('/contenido')" aria-label="Volver al contenido principal">
+        <v-icon class="mr-2">mdi-pillar</v-icon> Volver al Ágora
       </button>
     </div>
   </div>
@@ -57,12 +59,13 @@ const tienda = useOvaStore()
   border-radius: 20px 20px 0 0;
 }
 .medallon {
-  font-size: 3.5rem;
-  width: 80px; height: 80px; border-radius: 50%;
-  background: linear-gradient(135deg, #C9A84C, #E8C97A);
+  width: 90px; height: 90px; border-radius: 50%;
+  background: rgba(255,255,255,0.9);
   display: flex; align-items: center; justify-content: center;
   margin: 0 auto 16px;
   box-shadow: 0 4px 20px rgba(201,168,76,0.35);
+  border: 2px solid rgba(201,168,76,0.8);
+  padding: 2px;
 }
 .codigo {
   font-family: 'Cinzel Decorative', 'Cinzel', serif;
@@ -74,7 +77,7 @@ const tienda = useOvaStore()
 }
 .titulo {
   font-family: 'Cinzel', serif;
-  font-size: 1.5rem; color: #1B3A6B;
+  font-size: 1.5rem; color:var(--text-primary);
   letter-spacing: 0.06em; margin: 0 0 12px;
 }
 .desc {
@@ -95,7 +98,7 @@ const tienda = useOvaStore()
   font-size: 0.9rem; font-weight: 700;
   letter-spacing: 0.12em; text-transform: uppercase;
   color: #E8C97A;
-  background: linear-gradient(135deg, #1B3A6B, #2A5298);
+  background: linear-gradient(135deg, #1B3A6B, #122440);
   border: none; border-radius: 12px;
   cursor: pointer;
   box-shadow: 0 4px 16px rgba(27,58,107,0.3);

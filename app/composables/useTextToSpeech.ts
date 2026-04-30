@@ -1,3 +1,5 @@
+import { ref, computed, onBeforeUnmount, readonly } from 'vue'
+
 export const useTextToSpeech = () => {
   const isSpeaking = ref(false)
   const isAvailable = computed(() => 'speechSynthesis' in window)

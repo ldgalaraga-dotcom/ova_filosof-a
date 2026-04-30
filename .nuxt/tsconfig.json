@@ -112,6 +112,9 @@
       "vue-demi": [
         "../node_modules/nuxt/dist/app/compat/vue-demi"
       ],
+      "#pwa": [
+        "../node_modules/@vite-pwa/nuxt/dist/runtime/composables/index"
+      ],
       "#vue-router": [
         "../node_modules/vue-router"
       ],
@@ -122,7 +125,7 @@
         "./imports"
       ],
       "#app-manifest": [
-        "./manifest/meta/dev"
+        "./manifest/meta/d18a9d5e-c4a3-4395-ac37-268651b747bb.json"
       ],
       "#components": [
         "./components"
@@ -180,9 +183,10 @@
     "../node_modules/@pinia/nuxt/node_modules",
     "../node_modules/@pinia-plugin-persistedstate/nuxt/node_modules",
     "../node_modules/vuetify-nuxt-module/node_modules",
+    "../node_modules/@vite-pwa/nuxt/node_modules",
     "../node_modules/@nuxt/telemetry/node_modules",
     "../node_modules/runtime/server",
     "../node_modules/dist/runtime/server",
-    "dev"
+    "../.output"
   ]
 }

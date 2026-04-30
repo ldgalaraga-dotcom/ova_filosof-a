@@ -16,7 +16,7 @@
   --color-olive:       #5C6E2E;
   --color-ink:         #2C2416;
   --color-stone:       #8C7E6A;
-  --color-sky:         #4A7FA5;
+  --color-sky:         #1B3A6B;
   --color-surface:     #FDFAF3;
 }
 
@@ -188,7 +188,7 @@ a:hover {
 }
 
 .dark-mode a {
-  color: #6FA3C8 !important;
+  color: #1B3A6B !important;
 }
 .dark-mode a:hover {
   color: #C9A84C !important;

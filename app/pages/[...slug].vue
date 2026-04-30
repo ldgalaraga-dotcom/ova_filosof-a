@@ -1,12 +1,12 @@
 <template>
-  <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#1B3A6B,#2A5298);padding:20px">
+  <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#1B3A6B,#122440);padding:20px">
     <!-- Ornamento superior -->
     <div style="position:absolute;top:0;left:0;right:0;height:8px;background:repeating-linear-gradient(90deg,#C9A84C 0px,#C9A84C 20px,#1B3A6B 20px,#1B3A6B 40px)"></div>
 
     <!-- Contenido principal -->
     <div class="text-center">
       <!-- Iconos decorativos -->
-      <div style="font-size:6rem;margin-bottom:24px;opacity:0.9">🏛️</div>
+      <div style="margin-bottom:24px;opacity:0.9"><v-icon size="96" color="#C9A84C">mdi-pillar</v-icon></div>
 
       <!-- Número 404 estilizado -->
       <div style="
@@ -88,7 +88,11 @@
 
       <!-- Decoración de iconos -->
       <div style="margin-top:40px">
-        <div style="font-size:4rem;opacity:0.3;letter-spacing:20px;color:#C9A84C">🦉 ✦ 📚</div>
+        <div style="opacity:0.3;color:#C9A84C" class="d-flex align-center justify-center gap-4">
+          <v-icon size="64">mdi-owl</v-icon>
+          <span style="font-size: 2rem">✦</span>
+          <v-icon size="64">mdi-bookshelf</v-icon>
+        </div>
       </div>
     </div>
 

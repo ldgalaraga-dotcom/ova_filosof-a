@@ -3,17 +3,17 @@
     <v-card-text class="pa-6">
       <!-- Title -->
       <div class="text-center mb-6">
-        <h2 class="display-font" style="font-size: 2rem; color: #1B3A6B; margin-bottom: 4px;">
-          🎯 Empareja los Conceptos
+        <h2 class="display-font" style="font-size: 2rem; color:var(--text-primary); margin-bottom: 4px;">
+          <v-icon size="32" color="primary" class="mr-1">mdi-target</v-icon> Empareja los Conceptos
         </h2>
-        <p style="color: #999; font-size: 1rem;">Haz clic en un concepto de la izquierda y uno de la derecha</p>
+        <p style="color:var(--text-muted); font-size: 1rem;">Haz clic en un concepto de la izquierda y uno de la derecha</p>
       </div>
 
       <!-- Match game -->
       <v-row class="mb-6">
         <!-- Left side -->
         <v-col cols="12" md="6">
-          <p class="text-center mb-3" style="font-weight: 700; color: #666;">Concepto</p>
+          <p class="text-center mb-3" style="font-weight: 700; color:var(--text-muted);">Concepto</p>
           <div
             v-for="pair in pairs"
             :key="`left-${pair.id}`"
@@ -22,8 +22,8 @@
             @click="selectLeft(pair.id)"
             style="cursor: pointer; margin-bottom: 12px;"
           >
-            <div style="font-size: 2.5rem; margin-bottom: 8px; text-align: center;">{{ pair.leftEmoji }}</div>
-            <div style="font-size: 1.2rem; font-weight: 700; text-align: center; color: #333;">
+            <div style="margin-bottom: 8px; text-align: center; color: #1B3A6B;"><v-icon size="48">{{ pair.leftIcon }}</v-icon></div>
+            <div style="font-size: 1.2rem; font-weight: 700; text-align: center; color:var(--text-dark);">
               {{ pair.leftText }}
             </div>
           </div>
@@ -31,7 +31,7 @@
 
         <!-- Right side -->
         <v-col cols="12" md="6">
-          <p class="text-center mb-3" style="font-weight: 700; color: #666;">Significado</p>
+          <p class="text-center mb-3" style="font-weight: 700; color:var(--text-muted);">Significado</p>
           <div
             v-for="pair in pairs"
             :key="`right-${pair.id}`"
@@ -40,8 +40,8 @@
             @click="selectRight(pair.id)"
             style="cursor: pointer; margin-bottom: 12px;"
           >
-            <div style="font-size: 2.5rem; margin-bottom: 8px; text-align: center;">{{ pair.rightEmoji }}</div>
-            <div style="font-size: 1.2rem; font-weight: 700; text-align: center; color: #333;">
+            <div style="margin-bottom: 8px; text-align: center; color: #1B3A6B;"><v-icon size="48">{{ pair.rightIcon }}</v-icon></div>
+            <div style="font-size: 1.2rem; font-weight: 700; text-align: center; color:var(--text-dark);">
               {{ pair.rightText }}
             </div>
           </div>
@@ -51,7 +51,7 @@
       <!-- Matches display -->
       <div v-if="matches.length > 0" class="mb-6">
         <v-alert type="success" rounded="xl" class="mb-4">
-          <strong>✅ Pares emparejados: {{ matches.length }}/{{ pairs.length }}</strong>
+          <strong><v-icon size="20" class="mr-1">mdi-check-circle</v-icon> Pares emparejados: {{ matches.length }}/{{ pairs.length }}</strong>
         </v-alert>
       </div>
 
@@ -161,18 +161,18 @@ const complete = () => {
 .match-card {
   padding: 16px;
   border-radius: 12px;
-  background: #f5f5f5;
+  background:var(--bg-light);
   border: 3px solid #ddd;
   transition: all 0.3s ease;
 }
 
 .match-card:hover {
-  border-color: #1B3A6B;
+  border-color:var(--text-primary);
   transform: scale(1.02);
 }
 
 .match-card.selected {
-  border-color: #1B3A6B;
+  border-color:var(--text-primary);
   background: #ede7f6;
 }
 

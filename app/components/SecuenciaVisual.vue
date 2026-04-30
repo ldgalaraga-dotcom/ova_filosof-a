@@ -3,14 +3,14 @@
     <v-card-text class="pa-6">
       <!-- Title -->
       <div class="text-center mb-6">
-        <h2 class="display-font" style="font-size: 2rem; color: #1B3A6B; margin-bottom: 4px;">
-          🔢 Ordena los Pasos
+        <h2 class="display-font" style="font-size: 2rem; color:var(--text-primary); margin-bottom: 4px;">
+          <v-icon color="#C9A84C" class="mr-2">mdi-numeric</v-icon> Ordena los Pasos
         </h2>
-        <p style="color: #999; font-size: 1rem;">Haz clic en los pasos en el orden correcto (1 → {{ steps.length }})</p>
+        <p style="color:var(--text-muted); font-size: 1rem;">Haz clic en los pasos en el orden correcto (1 → {{ steps.length }})</p>
       </div>
 
       <!-- Available steps -->
-      <p style="font-weight: 700; color: #666; margin-bottom: 12px;">Pasos disponibles:</p>
+      <p style="font-weight: 700; color:var(--text-muted); margin-bottom: 12px;">Pasos disponibles:</p>
       <v-row class="mb-8">
         <v-col
           v-for="step in steps"
@@ -28,8 +28,8 @@
             style="cursor: pointer; transition: all 0.3s ease;"
           >
             <v-card-text class="pa-4 text-center">
-              <div style="font-size: 3rem; margin-bottom: 8px;">{{ step.emoji }}</div>
-              <div style="font-size: 1.1rem; font-weight: 700; color: #333;">
+              <div style="margin-bottom: 8px; color: #1B3A6B"><v-icon size="64">{{ step.icon }}</v-icon></div>
+              <div style="font-size: 1.1rem; font-weight: 700; color:var(--text-dark);">
                 {{ step.text }}
               </div>
             </v-card-text>
@@ -38,7 +38,7 @@
       </v-row>
 
       <!-- Selected sequence -->
-      <p v-if="selected.length > 0" style="font-weight: 700; color: #666; margin-bottom: 12px;">
+      <p v-if="selected.length > 0" style="font-weight: 700; color:var(--text-muted); margin-bottom: 12px;">
         Tu orden ({{ selected.length }}/{{ steps.length }}):
       </p>
       <v-row v-if="selected.length > 0" class="mb-6">
@@ -57,8 +57,8 @@
           >
             <v-card-text class="pa-4 text-center">
               <div class="number-badge mb-2">{{ idx + 1 }}</div>
-              <div style="font-size: 2.5rem; margin-bottom: 8px;">{{ step.emoji }}</div>
-              <div style="font-size: 1rem; font-weight: 700; color: #333;">
+              <div style="margin-bottom: 8px; color: #1B3A6B"><v-icon size="48">{{ step.icon }}</v-icon></div>
+              <div style="font-size: 1rem; font-weight: 700; color:var(--text-dark);">
                 {{ step.text }}
               </div>
               <v-btn
@@ -192,7 +192,7 @@ const complete = () => {
 }
 
 .step-card:hover {
-  border-color: #1B3A6B;
+  border-color:var(--text-primary);
   transform: scale(1.05);
 }
 
