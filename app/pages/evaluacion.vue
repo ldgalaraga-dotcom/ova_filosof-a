@@ -163,9 +163,9 @@
                 role="radio"
                 tabindex="0"
                 :aria-checked="opcionSeleccionada[indiceGlobal(indexEnPagina)] === oi ? 'true' : 'false'"
-                @click="opcionSeleccionada[indiceGlobal(indexEnPagina)] = oi"
-                @keyup.enter="opcionSeleccionada[indiceGlobal(indexEnPagina)] = oi"
-                @keyup.space.prevent="opcionSeleccionada[indiceGlobal(indexEnPagina)] = oi"
+                @click="opcionSeleccionada[indiceGlobal(indexEnPagina)] = Number(oi)"
+                @keyup.enter="opcionSeleccionada[indiceGlobal(indexEnPagina)] = Number(oi)"
+                @keyup.space.prevent="opcionSeleccionada[indiceGlobal(indexEnPagina)] = Number(oi)"
               >
                 <span class="opcion-letra">{{ String.fromCharCode(65+oi) }}.</span>
                 {{ op }}
