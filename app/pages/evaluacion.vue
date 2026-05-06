@@ -305,10 +305,12 @@
 
 <script setup lang="ts">
 import { useOvaStore } from '~/stores/ova'
+import { useAccessibility } from '~/composables/useAccessibility'
 import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
 
 const tienda = useOvaStore()
+useAccessibility() // Mantén la instancia activa para que el watch funcione
 const modoPractica = ref(false)
 const generandoPDF = ref(false)
 onMounted(() => {

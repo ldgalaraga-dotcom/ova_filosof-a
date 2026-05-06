@@ -57,9 +57,11 @@
         <v-card rounded="lg" elevation="2" class="text-center h-100 greek-panel">
           <div style="height:4px;background:linear-gradient(90deg,#1B3A6B,#C9A84C,#1B3A6B)"></div>
           <v-card-text class="pa-5">
-            <v-avatar :color="integrante.color" size="60" class="mb-3"
-              style="border:2px solid rgba(201,168,76,0.5)">
-              <v-icon size="32" color="white">{{ integrante.icon }}</v-icon>
+            <v-avatar size="80" class="mb-3" style="border:2px solid rgba(201,168,76,0.5);overflow:hidden;">
+              <template #default>
+                <v-img v-if="integrante.imagen" :src="integrante.imagen" cover />
+                <v-icon v-else size="32" color="white">{{ integrante.icon }}</v-icon>
+              </template>
             </v-avatar>
             <div style="font-family:'Cinzel',serif;font-weight:700;font-size:0.88rem;color:var(--text-primary);margin-bottom:4px;letter-spacing:0.03em">
               {{ integrante.nombre }}
@@ -167,16 +169,18 @@
 
 <script setup lang="ts">
 import { useOvaStore } from '~/stores/ova'
+import { useAccessibility } from '~/composables/useAccessibility'
 
 const tienda = useOvaStore()
+useAccessibility() // Mantén la instancia activa para que el watch funcione
 const mostrarReferencias = ref(false)
 onMounted(() => tienda.markPageVisited('creditos'))
 
 const equipo = [
   { nombre: 'Patricia Barroso Berrocal', rol: 'Dirección Pedagógica', icon: 'mdi-school', color: 'primary',   descripcion: 'Docente de Filosofía — Diseño curricular y validación del aprendizaje.' },
-  { nombre: 'Luis Galaraga',             rol: 'Desarrollo TIC',       icon: 'mdi-laptop', color: 'accent',    descripcion: 'Equipo TIC — Programación e interactividad del OVA.' },
-  { nombre: 'Lina Franco',               rol: 'Desarrollo TIC',       icon: 'mdi-laptop', color: 'accent',    descripcion: 'Equipo TIC — Programación e interactividad del OVA.' },
-  { nombre: 'Jesus Diaz Arteaga',        rol: 'Desarrollo TIC',       icon: 'mdi-laptop', color: 'accent',    descripcion: 'Equipo TIC — Programación e interactividad del OVA.' },
+  { nombre: 'Luis Galaraga',             rol: 'Lógica e Integración',  icon: 'mdi-laptop', color: 'accent',    descripcion: 'Encargado de la lógica e integración de actividades del OVA.', imagen: '/img/Luis Galaraga.jpeg' },
+  { nombre: 'Lina Franco',               rol: 'Diseño y Estética',     icon: 'mdi-laptop', color: 'accent',    descripcion: 'Encargada del diseño y estética de la interfaz.', imagen: '/img/Lina Franco.jpeg' },
+  { nombre: 'Jesus Diaz Arteaga',        rol: 'Programación',         icon: 'mdi-laptop', color: 'accent',    descripcion: 'Apoyo en programación y asistencia técnica del proyecto.', imagen: '/img/Jesus Diaz Arteaga.jpeg' },
   { nombre: 'Psicología Educativa',      rol: 'Diseño Inclusivo',     icon: 'mdi-brain', color: 'success',   descripcion: 'Adaptación de contenidos para educación inclusiva.' },
   { nombre: 'Rector/a',                  rol: 'Dirección Inst.',      icon: 'mdi-pillar', color: 'secondary', descripcion: 'Apoyo institucional y gestión de recursos.' },
   { nombre: 'Estudiantes Piloto',        rol: 'Pruebas',              icon: 'mdi-star-shooting', color: 'warning',   descripcion: 'Grados X y XI que probaron y evaluaron el OVA.' },

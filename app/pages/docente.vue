@@ -106,8 +106,10 @@
 
 <script setup lang="ts">
 import { useOvaStore } from '~/stores/ova'
+import { useAccessibility } from '~/composables/useAccessibility'
 
 const tienda = useOvaStore()
+useAccessibility() // Mantén la instancia activa para que el watch funcione
 const autenticado = ref(false)
 const password = ref('')
 const error = ref('')

@@ -28,8 +28,10 @@
 
 <script setup lang="ts">
 import { useOvaStore } from '~/stores/ova'
+import { useAccessibility } from '~/composables/useAccessibility'
 definePageMeta({ layout: false })
 const tienda = useOvaStore()
+useAccessibility() // Mantén la instancia activa para que el watch funcione
 </script>
 
 <style scoped>

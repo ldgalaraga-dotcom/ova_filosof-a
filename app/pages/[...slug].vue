@@ -102,6 +102,9 @@
 </template>
 
 <script setup lang="ts">
+import { useAccessibility } from '~/composables/useAccessibility'
+
+useAccessibility() // Mantén la instancia activa para que el watch funcione
 useHead({
   title: 'Página no encontrada · OVA Filosofía',
 })

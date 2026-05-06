@@ -89,10 +89,12 @@
 
 <script setup lang="ts">
 import { useOvaStore } from '~/stores/ova'
+import { useAccessibility } from '~/composables/useAccessibility'
 
 definePageMeta({ layout: false })
 
 const tienda = useOvaStore()
+useAccessibility() // Mantén la instancia activa para que el watch funcione
 const nombre = ref('')
 const error = ref(false)
 const entrando = ref(false)
@@ -168,15 +170,15 @@ function entrar() {
   max-width: 90vw;
   max-height: 90vw;
   object-fit: contain;
-  opacity: 0.08;
-  filter: grayscale(0.2) blur(2px);
+  opacity: 0.6;
+  filter: grayscale(0.2) blur(1px);
   animation: pulsoLogo 10s ease-in-out infinite;
   z-index: 0;
   pointer-events: none;
 }
 .dark-mode .logo-fondo {
-  opacity: 0.05;
-  filter: grayscale(0.5) blur(2px);
+  opacity: 0.6;
+  filter: grayscale(0.5) blur(1px);
 }
 
 @keyframes pulsoLogo {
@@ -228,7 +230,7 @@ function entrar() {
   align-items: center;
   justify-content: space-between;
   gap: 40px;
-  opacity: 0;
+  opacity: 60;
   transform: translateY(30px);
   transition: opacity 1s ease, transform 1s ease;
 }
@@ -253,12 +255,12 @@ function entrar() {
 .titulo-principal { font-family:'Cinzel Decorative','Cinzel',serif;font-size:clamp(3rem,8vw,5.5rem);font-weight:700;color:var(--text-primary);letter-spacing:0.06em;line-height:1;margin:0 0 10px 0;text-shadow:2px 2px 0 rgba(201,168,76,0.2); }
 .dark-mode .titulo-principal { color: #E8C97A; text-shadow: 2px 2px 0 rgba(0,0,0,0.5); }
 
-.titulo-secundario { font-family:'Cinzel',serif;font-size:clamp(1.2rem,4vw,2rem);font-weight:400;color:#1B3A6B;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 24px 0; }
-.dark-mode .titulo-secundario { color: #1B3A6B; }
+.titulo-secundario { font-family:'Cinzel',serif;font-size:clamp(1.2rem,4vw,2rem);font-weight:400;color:#d6d640;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 24px 0; }
+.dark-mode .titulo-secundario { color: #e6cb36; }
 
 .separador-ornamental { display:flex;align-items:center;gap:12px;justify-content:flex-start;margin:10px 0 24px; }
 .sep-linea { width: 80px;height:1px;background:linear-gradient(90deg,var(--text-primary),transparent); }
-.sep-linea-der { width: 80px;height:1px;background:linear-gradient(270deg,var(--text-primary),transparent); }
+.sep-linea-der { width: 80px;height:1px;background:linear-gradient(270deg,var(--text-primary),transparent); } 
 .sep-simbolo { color:#C9A84C;font-size:1.2rem; }
 
 .descripcion-ova { font-family:'EB Garamond',Georgia,serif;font-size:clamp(1.05rem,2.5vw,1.25rem);line-height:1.8;color:var(--text-dark);margin:0;max-width: 450px; }

@@ -40,6 +40,10 @@ export default defineNuxtConfig({
     }
   },
 
+  nitro: {
+    preset: 'vercel',
+  },
+
   app: {
     head: {
       htmlAttrs: {
