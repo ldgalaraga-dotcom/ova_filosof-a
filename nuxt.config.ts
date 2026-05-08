@@ -41,7 +41,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'vercel',
+    // Preset removido para compatibilidad general (Railway/Node)
   },
 
   app: {
