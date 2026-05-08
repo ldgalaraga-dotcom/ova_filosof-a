@@ -8,7 +8,7 @@
     <!-- Barra de progreso general -->
     <div class="mb-4">
       <div class="d-flex justify-space-between align-center mb-2">
-        <span style="font-family:'EB Garamond',serif;font-size:0.9rem;color:#5A5040;font-weight:600">
+        <span style="font-family:'EB Garamond',serif;font-size:0.9rem;color:var(--text-secondary);font-weight:600">
           Progreso general
         </span>
         <span style="font-family:'Cinzel',serif;font-weight:700;color:var(--text-primary);font-size:0.85rem">
@@ -34,7 +34,7 @@
             <div style="font-family:'Cinzel',serif;font-size:0.8rem;font-weight:700;color:var(--text-primary);letter-spacing:0.04em;margin-bottom:4px">
               VIDEOS
             </div>
-            <div style="font-family:'EB Garamond',serif;font-size:1.3rem;font-weight:600;color:#5A5040">
+            <div style="font-family:'EB Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--text-secondary)">
               {{ details.videosWatched }}<span style="font-size:0.85rem;color:var(--text-muted)">/{{ details.totalVideos }}</span>
             </div>
             <v-progress-linear
@@ -56,7 +56,7 @@
             <div style="font-family:'Cinzel',serif;font-size:0.8rem;font-weight:700;color:var(--text-primary);letter-spacing:0.04em;margin-bottom:4px">
               ACTIVIDADES
             </div>
-            <div style="font-family:'EB Garamond',serif;font-size:1.3rem;font-weight:600;color:#5A5040">
+            <div style="font-family:'EB Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--text-secondary)">
               {{ details.activitiesCompleted }}<span style="font-size:0.85rem;color:var(--text-muted)">/{{ details.totalActivities }}</span>
             </div>
             <v-progress-linear
@@ -84,7 +84,7 @@
             <div style="font-family:'Cinzel',serif;font-size:0.8rem;font-weight:700;color:var(--text-primary);letter-spacing:0.04em;margin-bottom:4px">
               EVALUACIÓN
             </div>
-            <div style="font-family:'EB Garamond',serif;font-size:1rem;font-weight:600;color:#5A5040">
+            <div style="font-family:'EB Garamond',serif;font-size:1rem;font-weight:600;color:var(--text-secondary)">
               {{ details.evaluationDone ? '¡Completada!' : 'Pendiente' }}
             </div>
             <v-chip
@@ -103,7 +103,7 @@
 
     <!-- Consejos -->
     <div class="pa-3 rounded-lg" style="background:rgba(232,201,122,0.1);border-left:4px solid #C9A84C">
-      <div style="font-family:'EB Garamond',serif;font-size:0.9rem;color:#5A5040;line-height:1.5;font-style:italic">
+      <div style="font-family:'EB Garamond',serif;font-size:0.9rem;color:var(--text-secondary);line-height:1.5;font-style:italic">
         <span v-if="details.videosWatched < details.totalVideos">
           <v-icon size="16" class="mr-1">mdi-lightbulb-on</v-icon> Continúa viendo los videos. Cada uno te acerca a la sabiduría filosófica.
         </span>

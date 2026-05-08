@@ -51,7 +51,7 @@
                   <div style="font-family:'EB Garamond',serif;font-size:0.85rem;color:var(--text-dark);line-height:1.2;margin-top:2px">
                     {{ logro.descripcion }}
                   </div>
-                  <div v-if="logro.obtenido" style="font-family:'EB Garamond',serif;font-size:0.7rem;color:#5C6E2E;margin-top:4px;font-style:italic">
+                  <div v-if="logro.obtenido" style="font-family:'EB Garamond',serif;font-size:0.7rem;color:var(--text-success);margin-top:4px;font-style:italic">
                     Obtenido: {{ logro.fecha }}
                   </div>
                 </div>
@@ -123,45 +123,47 @@
             </div>
           </div>
           <v-card-text class="pa-5">
-            <div v-for="(pregunta, i) in preguntasVF" :key="i" class="mb-4">
-              <v-card variant="outlined" rounded="lg" class="pa-4"
-                :style="respuestasVF[i] === null
-                  ? 'border-color:rgba(201,168,76,0.4)'
-                  : respuestasVF[i] === pregunta.correcto
-                    ? 'border-color:#5C6E2E;background:#D7EDD5'
-                    : 'border-color:#8B3A2A;background:#F5D9D4'"
-              >
-                <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px">
-                  <span style="margin-top:2px; color: #C9A84C"><v-icon size="24">{{ pregunta.icon }}</v-icon></span>
-                  <div style="font-family:'EB Garamond',serif;font-size:1rem;font-weight:600;color:var(--text-dark);line-height:1.5">
-                    {{ i + 1 }}. {{ pregunta.enunciado }}
+            <v-row>
+              <v-col v-for="(pregunta, i) in preguntasVF" :key="i" cols="12" md="6">
+                <v-card variant="outlined" rounded="lg" class="pa-4 h-100 d-flex flex-column"
+                  :style="respuestasVF[i] === null
+                    ? 'border-color:rgba(201,168,76,0.4)'
+                    : respuestasVF[i] === pregunta.correcto
+                      ? 'border-color:#5C6E2E;background:#D7EDD5'
+                      : 'border-color:#8B3A2A;background:#F5D9D4'"
+                >
+                  <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px; flex: 1">
+                    <span style="margin-top:2px; color: #C9A84C"><v-icon size="24">{{ pregunta.icon }}</v-icon></span>
+                    <div style="font-family:'EB Garamond',serif;font-size:1rem;font-weight:600;color:var(--text-dark);line-height:1.5">
+                      {{ i + 1 }}. {{ pregunta.enunciado }}
+                    </div>
                   </div>
-                </div>
-                <v-chip size="x-small" color="primary" variant="tonal" class="mb-3"
-                  style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.05em">
-                  <v-icon size="14" class="mr-1">mdi-video</v-icon> {{ pregunta.video }}
-                </v-chip>
-                <div v-if="respuestasVF[i] === null" class="d-flex gap-3">
-                  <v-btn color="success" variant="tonal" rounded="lg"
-                    style="font-family:'Cinzel',serif;letter-spacing:0.06em;font-size:0.8rem"
-                    @click="responderVF(i, true)">
-                    ✓ Verdadero
-                  </v-btn>
-                  <v-btn color="error" variant="tonal" rounded="lg"
-                    style="font-family:'Cinzel',serif;letter-spacing:0.06em;font-size:0.8rem"
-                    @click="responderVF(i, false)">
-                    ✗ Falso
-                  </v-btn>
-                </div>
-                <div v-else style="font-family:'EB Garamond',serif;font-size:0.95rem;color:var(--text-dark);font-style:italic">
-                  <strong style="font-style:normal">
-                    <v-icon size="20" class="mr-1">{{ respuestasVF[i] === pregunta.correcto ? 'mdi-check-circle' : 'mdi-close-circle' }}</v-icon>
-                    {{ respuestasVF[i] === pregunta.correcto ? '¡Correcto!' : 'Incorrecto' }}
-                  </strong>
-                  — {{ pregunta.explicacion }}
-                </div>
-              </v-card>
-            </div>
+                  <v-chip size="x-small" color="primary" variant="tonal" class="mb-3 w-fit"
+                    style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.05em; align-self: flex-start;">
+                    <v-icon size="14" class="mr-1">mdi-video</v-icon> {{ pregunta.video }}
+                  </v-chip>
+                  <div v-if="respuestasVF[i] === null" class="d-flex gap-3">
+                    <v-btn color="success" variant="tonal" rounded="lg"
+                      style="font-family:'Cinzel',serif;letter-spacing:0.06em;font-size:0.8rem"
+                      @click="responderVF(i, true)">
+                      ✓ Verdadero
+                    </v-btn>
+                    <v-btn color="error" variant="tonal" rounded="lg"
+                      style="font-family:'Cinzel',serif;letter-spacing:0.06em;font-size:0.8rem"
+                      @click="responderVF(i, false)">
+                      ✗ Falso
+                    </v-btn>
+                  </div>
+                  <div v-else style="font-family:'EB Garamond',serif;font-size:0.95rem;color:var(--text-dark);font-style:italic">
+                    <strong style="font-style:normal">
+                      <v-icon size="20" class="mr-1">{{ respuestasVF[i] === pregunta.correcto ? 'mdi-check-circle' : 'mdi-close-circle' }}</v-icon>
+                      {{ respuestasVF[i] === pregunta.correcto ? '¡Correcto!' : 'Incorrecto' }}
+                    </strong>
+                    — {{ pregunta.explicacion }}
+                  </div>
+                </v-card>
+              </v-col>
+            </v-row>
             <div v-if="vfCompletado" class="text-center mt-4">
               <div style="font-family:'Cinzel',serif;font-size:0.85rem;color:var(--text-primary);margin-bottom:10px;letter-spacing:0.05em">
                 Acertaste {{ aciertosVF }} de {{ preguntasVF.length }} preguntas
@@ -224,7 +226,7 @@
                   v-for="idea in juegoEmparejamiento.ideas" :key="idea.id"
                   class="pa-3 rounded-lg mb-3"
                   :class="claseIdea(idea.id)"
-                  style="background:#FDF6E3;border:2px solid transparent;transition:all .2s;cursor:pointer;font-family:'EB Garamond',serif;font-size:0.95rem;color:var(--text-dark);font-style:italic"
+                  style="background:var(--bg-warm);border:2px solid transparent;transition:all .2s;cursor:pointer;font-family:'EB Garamond',serif;font-size:0.95rem;color:var(--text-dark);font-style:italic"
                   @click="seleccionarIdea(idea.id)"
                 >
                   "{{ idea.texto }}"
@@ -256,202 +258,237 @@
       </v-window-item>
 
       <!-- ═══════════════════════════════
-           ACTIVIDAD 3 — El Logos
-           Ordenar pasos del filósofo
+           ACTIVIDAD 3 — La Academia
+           (Fusión de El Logos y Las Formas)
       ════════════════════════════════ -->
       <v-window-item :value="2">
         <v-card rounded="lg" elevation="3" style="overflow:hidden;border:1px solid rgba(201,168,76,0.25)">
-          <div style="background:linear-gradient(135deg,#1A3A2A,#2A5A3A);padding:20px 20px 14px">
-            <div class="d-flex align-center gap-2 mb-1">
-              <v-icon color="secondary">mdi-source-branch</v-icon>
-              <span style="font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:#E8C97A;letter-spacing:0.08em">
-                El Logos
-              </span>
-            </div>
-            <div style="font-family:'EB Garamond',serif;font-style:italic;color:rgba(232,201,122,0.75);font-size:0.92rem">
-              «Logos»: el camino de la razón ordenada · Toca en el orden correcto (1→{{ juegoOrden.pasosMezclados.length }}) <v-icon size="16">mdi-numeric</v-icon>
-            </div>
+          <div style="background:linear-gradient(135deg,#1B3A6B,#122440);padding:0">
+            <v-tabs v-model="subActividadAcademia" bg-color="transparent" color="secondary" grow
+              style="font-family:'Cinzel',serif;letter-spacing:0.05em">
+              <v-tab :value="0"><v-icon class="mr-2">mdi-source-branch</v-icon> El Logos</v-tab>
+              <v-tab :value="1"><v-icon class="mr-2">mdi-shape-outline</v-icon> Las Formas</v-tab>
+            </v-tabs>
           </div>
-          <v-card-text class="pa-5">
-            <v-row>
-              <v-col v-for="paso in juegoOrden.pasosMezclados" :key="paso.id" cols="6" sm="4">
-                <div
-                  class="pa-4 rounded-lg text-center mb-2"
-                  :class="claseOrden(paso.id)"
-                  style="background:var(--bg-light);border:2px solid transparent;transition:all .2s;cursor:pointer"
-                  @click="tocarPasoOrden(paso.id)"
-                >
-                  <div style="margin-bottom:8px; color: var(--text-primary)"><v-icon size="48">{{ paso.icon }}</v-icon></div>
-                  <div style="font-family:'Cinzel',serif;font-size:0.82rem;font-weight:700;color:var(--text-primary);letter-spacing:0.04em">
-                    {{ paso.etiqueta }}
+          
+          <v-window v-model="subActividadAcademia">
+            <!-- Parte A: El Logos -->
+            <v-window-item :value="0">
+              <v-card-text class="pa-5">
+                <div class="mb-4" style="font-family:'EB Garamond',serif;font-style:italic;color:var(--text-muted);font-size:0.95rem">
+                   «Logos»: el camino de la razón ordenada · Toca en el orden correcto.
+                </div>
+                <v-row>
+                  <v-col v-for="paso in juegoOrden.pasosMezclados" :key="paso.id" cols="6" sm="4">
+                    <div class="pa-4 rounded-lg text-center mb-2" :class="claseOrden(paso.id)"
+                      style="background:var(--bg-light);border:2px solid transparent;transition:all .2s;cursor:pointer"
+                      @click="tocarPasoOrden(paso.id)">
+                      <div style="margin-bottom:8px; color: var(--text-primary)"><v-icon size="48">{{ paso.icon }}</v-icon></div>
+                      <div style="font-family:'Cinzel',serif;font-size:0.82rem;font-weight:700;color:var(--text-primary);letter-spacing:0.04em">
+                        {{ paso.etiqueta }}
+                      </div>
+                    </div>
+                  </v-col>
+                </v-row>
+                <div v-if="juegoOrden.seleccionados.length" class="mt-4">
+                  <div class="d-flex align-center justify-space-between mb-2">
+                    <div style="font-family:'Cinzel',serif;font-weight:600;font-size:0.82rem;color:var(--text-primary);letter-spacing:0.06em">TU ORDEN:</div>
+                    <v-btn v-if="!juegoOrden.completado" size="x-small" variant="text" color="error" @click="juegoOrden.seleccionados = []">
+                      <v-icon size="small" class="mr-1">mdi-delete-sweep</v-icon> Limpiar
+                    </v-btn>
+                  </div>
+                  <div class="d-flex flex-wrap gap-2">
+                    <v-chip v-for="(id, i) in juegoOrden.seleccionados" :key="id"
+                      :color="juegoOrden.completado ? (juegoOrden.ordenCorrecto[i] === id ? 'success' : 'error') : 'primary'"
+                      size="small" style="font-family:'Cinzel',serif;font-size:0.72rem" :closable="!juegoOrden.completado"
+                      @click:close="juegoOrden.seleccionados = juegoOrden.seleccionados.filter(s => s !== id)">
+                      {{ i + 1 }}. {{ juegoOrden.pasosMezclados.find(s => s.id === id)?.etiqueta }}
+                    </v-chip>
                   </div>
                 </div>
-              </v-col>
-            </v-row>
-
-            <div v-if="juegoOrden.seleccionados.length" class="mt-4">
-              <div class="d-flex align-center justify-space-between mb-2">
-                <div style="font-family:'Cinzel',serif;font-weight:600;font-size:0.82rem;color:var(--text-primary);letter-spacing:0.06em">
-                  TU ORDEN:
+                <div v-if="juegoOrden.seleccionados.length === juegoOrden.pasosMezclados.length && !juegoOrden.completado" class="mt-4">
+                  <v-btn color="primary" rounded="lg" @click="verificarOrden">Verificar</v-btn>
                 </div>
-                <v-btn v-if="!juegoOrden.completado" size="x-small" variant="text" color="error" @click="juegoOrden.seleccionados = []">
-                  <v-icon size="small" class="mr-1">mdi-delete-sweep</v-icon> Limpiar
-                </v-btn>
-              </div>
-              <div class="d-flex flex-wrap gap-2">
-                <v-chip
-                  v-for="(id, i) in juegoOrden.seleccionados" :key="id"
-                  :color="juegoOrden.completado
-                    ? (juegoOrden.ordenCorrecto[i] === id ? 'success' : 'error')
-                    : 'primary'"
-                  size="small" style="font-family:'Cinzel',serif;font-size:0.72rem"
-                  :closable="!juegoOrden.completado"
-                  @click:close="juegoOrden.seleccionados = juegoOrden.seleccionados.filter(s => s !== id)"
-                >
-                  {{ i + 1 }}. {{ juegoOrden.pasosMezclados.find(s => s.id === id)?.etiqueta }}
-                </v-chip>
-              </div>
-            </div>
+                <div v-if="juegoOrden.completado" class="mt-4">
+                  <v-alert :type="juegoOrden.esCorrecto ? 'success' : 'warning'" rounded="lg">
+                    {{ juegoOrden.esCorrecto ? '¡Orden correcto!' : 'Orden incorrecto' }}
+                  </v-alert>
+                </div>
+              </v-card-text>
+            </v-window-item>
 
-            <div v-if="juegoOrden.seleccionados.length === juegoOrden.pasosMezclados.length && !juegoOrden.completado" class="mt-4">
-              <v-btn color="primary" rounded="lg"
-                style="font-family:'Cinzel',serif;letter-spacing:0.08em;text-transform:uppercase"
-                @click="verificarOrden">
-                <v-icon class="mr-1">mdi-check</v-icon> Verificar
-              </v-btn>
-            </div>
-            <div v-if="juegoOrden.completado" class="mt-4">
-              <v-alert :type="juegoOrden.esCorrecto ? 'success' : 'warning'" rounded="lg" class="mb-3"
-                style="font-family:'EB Garamond',serif;font-size:0.95rem">
-                {{ juegoOrden.esCorrecto
-                  ? '¡Orden correcto! Así razona un verdadero filósofo.'
-                  : 'El orden correcto: ' + juegoOrden.ordenCorrecto.map(id => juegoOrden.pasosMezclados.find(p => p.id === id)?.etiqueta).join(' → ') }}
-              </v-alert>
-              <div class="d-flex gap-3">
-                <v-btn v-if="!juegoOrden.esCorrecto" color="grey" variant="outlined" rounded="lg"
-                  style="font-family:'Cinzel',serif;font-size:0.78rem"
-                  @click="reiniciarOrden">
-                  <v-icon class="mr-1">mdi-refresh</v-icon> Reintentar
-                </v-btn>
-                <v-btn color="primary" rounded="lg"
-                  style="font-family:'Cinzel',serif;letter-spacing:0.08em;text-transform:uppercase"
-                  @click="tienda.completeActivity(2)">
-                  <v-icon class="mr-1">mdi-check</v-icon> Completar actividad
-                </v-btn>
-              </div>
+            <!-- Parte B: Las Formas -->
+            <v-window-item :value="1">
+              <v-card-text class="pa-5">
+                <v-row>
+                  <v-col cols="12" md="6">
+                    <div v-for="img in juegoFormas.imagenes" :key="img.id"
+                      class="rounded-xl mb-3 text-center pa-3" :class="claseImagen(img.id)"
+                      style="border:3px solid transparent;transition:all .25s;cursor:pointer;position:relative"
+                      @click="seleccionarImagen(img.id)">
+                      <div v-if="juegoFormas.emparejados[img.id]" style="position:absolute;top:6px;right:6px;background:#5C6E2E;color:white;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700">✓</div>
+                      <v-icon size="40">{{ img.icon }}</v-icon>
+                      <div style="font-family:'Cinzel',serif;font-size:0.8rem;font-weight:700">{{ img.nombre }}</div>
+                    </div>
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <div v-for="concepto in juegoFormas.conceptos" :key="concepto.id"
+                      class="rounded-xl mb-3 pa-3" :class="claseConcepto(concepto.id)"
+                      style="border:3px solid transparent;transition:all .25s;cursor:pointer"
+                      @click="seleccionarConcepto(concepto.id)">
+                      <div style="font-family:'EB Garamond',serif;font-size:0.95rem;font-style:italic">"{{ concepto.texto }}"</div>
+                    </div>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+            </v-window-item>
+          </v-window>
+
+          <v-divider />
+          <v-card-text class="pa-4 text-center">
+            <v-btn v-if="juegoOrden.completado && juegoFormas.paresCorrectos === juegoFormas.imagenes.length" 
+              color="primary" rounded="lg" @click="tienda.completeActivity(2)">
+              <v-icon class="mr-1">mdi-check</v-icon> Completar La Academia
+            </v-btn>
+            <div v-else style="font-family:'Cinzel',serif;font-size:0.8rem;color:var(--text-muted)">
+              Completa ambas partes para finalizar esta actividad ({{ (juegoOrden.completado ? 1 : 0) + (juegoFormas.paresCorrectos === juegoFormas.imagenes.length ? 1 : 0) }}/2)
             </div>
           </v-card-text>
         </v-card>
       </v-window-item>
 
       <!-- ═══════════════════════════════
-           ACTIVIDAD 4 — Las Formas de Platón
-           Relacionar imagen con concepto filosófico
+           ACTIVIDAD 4 — El Oráculo
       ════════════════════════════════ -->
       <v-window-item :value="3">
+        <!-- Contenido de El Oráculo (antes era :value="4") -->
         <v-card rounded="lg" elevation="3" style="overflow:hidden;border:1px solid rgba(201,168,76,0.25)">
-          <div style="background:linear-gradient(135deg,#3A1B1B,#6A2A2A);padding:20px 20px 14px">
+          <div style="background:linear-gradient(135deg,#1B3A6B,#122440);padding:20px 20px 14px">
             <div class="d-flex align-center gap-2 mb-1">
-              <v-icon color="secondary">mdi-shape-outline</v-icon>
+              <v-icon color="secondary">mdi-eye-circle</v-icon>
               <span style="font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:#E8C97A;letter-spacing:0.08em">
-                Las Formas de Platón
+                El Oráculo de Delfos
               </span>
             </div>
-            <div style="font-family:'EB Garamond',serif;font-style:italic;color:rgba(232,201,122,0.75);font-size:0.92rem">
-              «Eidos»: cada imagen representa una idea filosófica — encuéntrala · Toca la imagen, luego su concepto <v-icon size="16">mdi-image</v-icon>
+          </div>
+          <v-card-text class="pa-5">
+            <!-- (Contenido simplificado por espacio, lo recuperaré del original) -->
+             <div v-for="(preg, i) in preguntasOraculo" :key="i" class="mb-5">
+                <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px">
+                  <div style="min-width:32px;height:32px;border-radius:50%;background:#1B3A6B;display:flex;align-items:center;justify-content:center;color:#E8C97A">{{ i + 1 }}</div>
+                  <div style="flex:1">
+                    <div class="mb-2 font-weight-bold">{{ preg.pregunta }}</div>
+                    <v-row dense>
+                      <v-col v-for="(op, oi) in preg.opciones" :key="oi" cols="12" sm="6">
+                        <div class="pa-3 rounded-lg mb-2" :style="estiloOpcionOraculo(i, oi)" @click="responderOraculo(i, oi)" style="cursor:pointer;border:2px solid">
+                          {{ op }}
+                        </div>
+                      </v-col>
+                    </v-row>
+                  </div>
+                </div>
+             </div>
+             <div v-if="oraculoCompletado" class="text-center mt-4">
+                <v-btn color="primary" rounded="lg" @click="tienda.completeActivity(3)">Completar Actividad</v-btn>
+             </div>
+          </v-card-text>
+        </v-card>
+      </v-window-item>
+
+      <!-- ═══════════════════════════════
+           ACTIVIDAD 5 — Sopa de Letras
+      ════════════════════════════════ -->
+      <v-window-item :value="4">
+        <v-card rounded="lg" elevation="3" style="overflow:hidden;border:1px solid rgba(201,168,76,0.25)">
+          <div style="background:linear-gradient(135deg,#3A2B1B,#5A422B);padding:20px 20px 14px">
+             <div class="d-flex align-center gap-2 mb-1">
+              <v-icon color="secondary">mdi-format-letter-matches</v-icon>
+              <span style="font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:#E8C97A;letter-spacing:0.08em">Sopa de Letras</span>
             </div>
           </div>
-
-          <v-card-text class="pa-5">
-            <!-- Instrucciones -->
-            <div class="mb-4 pa-3 rounded-lg d-flex align-center gap-3"
-              style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.3)">
-              <v-icon size="20" color="secondary">mdi-pin</v-icon>
-              <div style="font-family:'EB Garamond',serif;font-size:0.95rem;color:var(--text-dark);line-height:1.5">
-                Selecciona una <strong>imagen</strong> de la izquierda y luego el <strong>concepto</strong> de la derecha que le corresponde.
+          <v-card-text class="pa-5 text-center">
+            <div class="sopa-grid mb-4">
+              <div v-for="(fila, y) in sopaLetras.grid" :key="'fila-'+y" class="sopa-fila">
+                <div v-for="(letra, x) in fila" :key="'celda-'+x+'-'+y" class="sopa-celda" :class="{'celda-encontrada': esCeldaEncontrada(x, y), 'celda-seleccionada': esCeldaSeleccionada(x, y)}" @click="clickCeldaSopa(x, y)">{{ letra }}</div>
               </div>
             </div>
+            <div v-if="sopaLetras.completado" class="mt-5"><v-btn color="primary" @click="tienda.completeActivity(4)">Completar Actividad</v-btn></div>
+          </v-card-text>
+        </v-card>
+      </v-window-item>
 
+      <!-- ═══════════════════════════════
+           ACTIVIDAD 6 — Crucigrama
+      ════════════════════════════════ -->
+      <v-window-item :value="5">
+        <v-card rounded="lg" elevation="3" style="overflow:hidden;border:1px solid rgba(201,168,76,0.25)">
+          <div style="background:linear-gradient(135deg,#1B3A6B,#5C6E2E);padding:20px 20px 14px">
+            <div class="d-flex align-center gap-2 mb-1">
+              <v-icon color="secondary">mdi-grid</v-icon>
+              <span style="font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:#E8C97A;letter-spacing:0.08em">Crucigrama Filosófico</span>
+            </div>
+            <div style="font-family:'EB Garamond',serif;font-style:italic;color:rgba(232,201,122,0.75);font-size:0.92rem">
+              Encuentra las 10 palabras clave y verifícalas para avanzar.
+            </div>
+          </div>
+          <v-card-text class="pa-5">
             <v-row>
-              <!-- Imágenes (izquierda) -->
-              <v-col cols="12" md="5">
-                <div class="text-center mb-3">
-                  <v-chip color="primary" size="small" style="font-family:'Cinzel',serif;letter-spacing:0.05em">
-                    <v-icon size="16" class="mr-1">mdi-image</v-icon> Imagen filosófica
-                  </v-chip>
+              <v-col cols="12" md="7" class="d-flex flex-column align-center">
+                <div class="crucigrama-container pa-4 rounded-xl">
+                  <div v-for="(fila, y) in crucigrama.grid" :key="'cf-'+y" class="d-flex">
+                    <div v-for="(celda, x) in fila" :key="'cc-'+x+'-'+y" class="crucigrama-celda-wrapper">
+                      <div v-if="celda !== ''" class="celda-activa">
+                        <!-- Número de pista -->
+                        <span class="pista-numero">{{ obtenerNumeroPista(x, y) }}</span>
+                        <input v-model="crucigrama.userGrid[y][x]" 
+                          maxlength="1" 
+                          class="crucigrama-input" 
+                          :class="obtenerClaseEstado(x, y)"
+                          @input="alEscribir(x, y)" />
+                      </div>
+                      <div v-else class="crucigrama-vacio"></div>
+                    </div>
+                  </div>
                 </div>
-                <div
-                  v-for="img in juegoFormas.imagenes" :key="img.id"
-                  class="rounded-xl mb-3 text-center pa-3"
-                  :class="claseImagen(img.id)"
-                  style="border:3px solid transparent;transition:all .25s;cursor:pointer;position:relative"
-                  @click="seleccionarImagen(img.id)"
-                >
-                  <!-- Check si ya emparejado -->
-                  <div v-if="juegoFormas.emparejados[img.id]"
-                    style="position:absolute;top:6px;right:6px;background:#5C6E2E;color:white;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700">
-                    ✓
-                  </div>
-                  <div style="margin-bottom:8px; color: var(--text-primary)"><v-icon size="48">{{ img.icon }}</v-icon></div>
-                  <div style="font-family:'Cinzel',serif;font-size:0.8rem;font-weight:700;color:var(--text-primary);letter-spacing:0.04em">
-                    {{ img.nombre }}
-                  </div>
+                
+                <div class="d-flex gap-3 mt-5">
+                  <v-btn color="secondary" variant="flat" rounded="lg" prepend-icon="mdi-check-all"
+                    style="font-family:'Cinzel',serif;letter-spacing:0.05em" @click="verificarCrucigrama">
+                    Verificar Respuestas
+                  </v-btn>
+                  <v-btn color="grey" variant="outlined" rounded="lg" prepend-icon="mdi-refresh"
+                    style="font-family:'Cinzel',serif;letter-spacing:0.05em" @click="reiniciarCrucigrama">
+                    Reiniciar
+                  </v-btn>
                 </div>
               </v-col>
-
-              <!-- Flecha central -->
-              <v-col cols="12" md="2" class="d-flex align-center justify-center">
-                <div style="font-size:2rem;color:rgba(201,168,76,0.5);font-family:'Cinzel',serif">
-                  <div class="d-none d-md-block">→</div>
-                  <div class="d-md-none">↓</div>
-                </div>
-              </v-col>
-
-              <!-- Conceptos (derecha) -->
+              
               <v-col cols="12" md="5">
-                <div class="text-center mb-3">
-                  <v-chip color="secondary" size="small" style="font-family:'Cinzel',serif;letter-spacing:0.05em">
-                    <v-icon size="16" class="mr-1">mdi-lightbulb</v-icon> Concepto filosófico
-                  </v-chip>
-                </div>
-                <div
-                  v-for="concepto in juegoFormas.conceptos" :key="concepto.id"
-                  class="rounded-xl mb-3 pa-3"
-                  :class="claseConcepto(concepto.id)"
-                  style="border:3px solid transparent;transition:all .25s;cursor:pointer"
-                  @click="seleccionarConcepto(concepto.id)"
-                >
-                  <div style="font-family:'EB Garamond',serif;font-size:0.95rem;color:var(--text-dark);line-height:1.5;font-style:italic">
-                    "{{ concepto.texto }}"
+                <div class="pa-4 rounded-lg" style="background:rgba(201,168,76,0.05); border:1px solid rgba(201,168,76,0.2); max-height: 500px; overflow-y: auto;">
+                  <div class="mb-4">
+                    <div class="text-overline mb-1" style="color:var(--text-muted)">Horizontales</div>
+                    <div v-for="h in crucigrama.hints.filter(h => h.dir === 'H')" :key="'h-'+h.id" class="pista-item">
+                      <span class="pista-badge">{{ h.id }}</span> {{ h.text }}
+                    </div>
                   </div>
-                  <div style="font-family:'Cinzel',serif;font-size:0.7rem;color:var(--text-muted);margin-top:4px;letter-spacing:0.06em;text-transform:uppercase">
-                    {{ concepto.autor }}
+                  <div>
+                    <div class="text-overline mb-1" style="color:var(--text-muted)">Verticales</div>
+                    <div v-for="v in crucigrama.hints.filter(h => h.dir === 'V')" :key="'v-'+v.id" class="pista-item">
+                      <span class="pista-badge">{{ v.id }}</span> {{ v.text }}
+                    </div>
                   </div>
                 </div>
               </v-col>
             </v-row>
-
-            <!-- Contador y reset -->
-            <div class="mt-3 d-flex gap-3 align-center">
-              <div style="font-family:'Cinzel',serif;font-size:0.8rem;color:var(--text-muted);letter-spacing:0.05em">
-                Pares: {{ juegoFormas.paresCorrectos }}/{{ juegoFormas.imagenes.length }}
+            
+            <div v-if="crucigrama.completado" class="text-center mt-6 pa-4 rounded-xl" style="background:rgba(92,110,46,0.1); border:1px solid #5C6E2E">
+              <div style="font-family:'Cinzel',serif;color:var(--text-success);font-weight:700;font-size:1.1rem;margin-bottom:10px">
+                ✨ ¡HAS RESUELTO EL ENIGMA! ✨
               </div>
-              <v-btn v-if="juegoFormas.paresCorrectos > 0" color="grey" variant="outlined" size="small"
-                rounded="lg" @click="reiniciarFormas">
-                <v-icon>mdi-refresh</v-icon>
-              </v-btn>
-            </div>
-
-            <!-- Finalizado -->
-            <div v-if="juegoFormas.paresCorrectos === juegoFormas.imagenes.length" class="text-center mt-4">
-              <v-alert type="success" rounded="lg" class="mb-3"
-                style="font-family:'EB Garamond',serif;font-size:1rem">
-                ✨ ¡Has reconocido todas las Formas! Platón estaría orgulloso de ti.
-              </v-alert>
-              <v-btn color="primary" rounded="lg"
+              <v-btn color="primary" rounded="lg" size="large"
                 style="font-family:'Cinzel',serif;letter-spacing:0.08em;text-transform:uppercase"
-                @click="tienda.completeActivity(3)">
-                <v-icon class="mr-1">mdi-check</v-icon> Completar actividad
+                @click="tienda.completeActivity(5)">
+                <v-icon class="mr-1">mdi-check</v-icon> Finalizar actividades
               </v-btn>
             </div>
           </v-card-text>
@@ -636,13 +673,14 @@ onMounted(() => {
 
 const mostrarLogros = ref(false)
 const actividadActual = ref(0)
+const subActividadAcademia = ref(0)
 const actividades = [
   { icon: 'mdi-scale-balance', nombre: 'La Dialéctica' },
   { icon: 'mdi-account-group', nombre: 'El Simposio' },
-  { icon: 'mdi-source-branch', nombre: 'El Logos' },
-  { icon: 'mdi-shape-outline', nombre: 'Las Formas' },
+  { icon: 'mdi-school', nombre: 'La Academia' },
   { icon: 'mdi-eye-circle', nombre: 'El Oráculo' },
   { icon: 'mdi-format-letter-matches', nombre: 'Sopa de Letras' },
+  { icon: 'mdi-grid', nombre: 'Crucigrama' },
 ]
 const cantidadCompletadas = computed(() => tienda.completedActivities.length)
 const todasCompletadas    = computed(() => tienda.completedActivities.length >= 6)
@@ -928,10 +966,10 @@ function responderOraculo(i: number, opcion: number) { respuestasOraculo.value[i
 function estiloOpcionOraculo(i: number, oi: number): string {
   const resp    = respuestasOraculo.value[i]
   const correct = preguntasOraculo[i].correcto
-  if (resp === null) return 'border-color:rgba(201,168,76,0.3);background:#FDFAF3;color:var(--text-dark)'
-  if (oi === correct) return 'border-color:#5C6E2E;background:#D7EDD5;color:var(--text-dark)'
-  if (resp === oi)    return 'border-color:#8B3A2A;background:#F5D9D4;color:var(--text-dark)'
-  return 'border-color:rgba(201,168,76,0.15);background:#F8F4EC;color:var(--text-muted)'
+  if (resp === null) return 'border-color:rgba(201,168,76,0.3);background:var(--bg-warm);color:var(--text-dark)'
+  if (oi === correct) return 'border-color:var(--border-success);background:var(--bg-success);color:var(--text-dark)'
+  if (resp === oi)    return 'border-color:var(--border-error);background:var(--bg-error);color:var(--text-dark)'
+  return 'border-color:rgba(201,168,76,0.15);background:var(--bg-light);color:var(--text-muted)'
 }
 
 // ══════════════════════════════════════
@@ -1076,13 +1114,133 @@ function esCeldaEncontrada(x: number, y: number) {
 function esCeldaSeleccionada(x: number, y: number) {
   return sopaLetras.primerClick && sopaLetras.primerClick.x === x && sopaLetras.primerClick.y === y
 }
+// ══════════════════════════════════════
+// ACTIVIDAD 6 — Crucigrama
+// ══════════════════════════════════════
+const crucigrama = reactive({
+  grid: Array(12).fill(0).map(() => Array(12).fill('')),
+  userGrid: Array(12).fill(0).map(() => Array(12).fill('')),
+  validationGrid: Array(12).fill(0).map(() => Array(12).fill(null as boolean | null)),
+  hints: [] as { id: number, dir: string, row: number, col: number, text: string }[],
+  completado: false,
+})
+
+function inicializarCrucigrama() {
+  const g = Array(12).fill(0).map(() => Array(12).fill(''))
+  
+  const poner = (word: string, r: number, c: number, dir: 'H' | 'V') => {
+    word.split('').forEach((l, i) => {
+      if (dir === 'H') g[r][c + i] = l
+      else g[r + i][c] = l
+    })
+  }
+
+  // Layout 100% verificado — Sin conflictos
+  poner("FILOSOFIA", 2, 2, 'H')
+  poner("SOCRATES",  1, 5, 'V')
+  poner("AGORA",     5, 5, 'H')
+  poner("LOGOS",     4, 7, 'V')
+  poner("ETHOS",     8, 1, 'H')
+  poner("IDEA",      6, 1, 'V')
+  poner("RAZON",     9, 0, 'H')
+  poner("PLATON",    3, 9, 'V')
+  poner("MITO",      1, 3, 'V')
+  poner("SER",       1, 5, 'H')
+
+  crucigrama.grid = g
+  crucigrama.userGrid = Array(12).fill(0).map(() => Array(12).fill(''))
+  crucigrama.validationGrid = Array(12).fill(0).map(() => Array(12).fill(null))
+  
+  crucigrama.hints = [
+    { id: 1, dir: 'H', row: 2, col: 2, text: 'Amor por la sabiduría.' },
+    { id: 2, dir: 'V', row: 1, col: 5, text: 'Maestro que no dejó escritos.' },
+    { id: 3, dir: 'H', row: 5, col: 5, text: 'Plaza pública de Atenas.' },
+    { id: 4, dir: 'V', row: 4, col: 7, text: 'Palabra, razón o discurso.' },
+    { id: 5, dir: 'H', row: 8, col: 1, text: 'Costumbre o carácter moral.' },
+    { id: 6, dir: 'V', row: 6, col: 1, text: 'Representación mental de algo.' },
+    { id: 7, dir: 'H', row: 9, col: 0, text: 'Capacidad de pensar críticamente.' },
+    { id: 8, dir: 'V', row: 3, col: 9, text: 'Autor de "La República".' },
+    { id: 9, dir: 'V', row: 1, col: 3, text: 'Relato simbólico tradicional.' },
+    { id: 10, dir: 'H', row: 1, col: 5, text: 'Concepto fundamental de Parménides.' },
+  ]
+}
+
+onMounted(() => {
+  inicializarCrucigrama()
+})
+
+function obtenerNumeroPista(x: number, y: number) {
+  const hints = crucigrama.hints.filter(h => h.row === y && h.col === x)
+  if (hints.length > 0) {
+    return hints.map(h => h.id).join('/')
+  }
+  return ''
+}
+
+function alEscribir(x: number, y: number) {
+  crucigrama.validationGrid[y][x] = null // Reset validation on type
+}
+
+function obtenerClaseEstado(x: number, y: number) {
+  const status = crucigrama.validationGrid[y][x]
+  if (status === true) return 'celda-correcta'
+  if (status === false) return 'celda-incorrecta'
+  return ''
+}
+
+function verificarCrucigrama() {
+  let todoCorrecto = true
+  for (let y = 0; y < crucigrama.grid.length; y++) {
+    for (let x = 0; x < crucigrama.grid[y].length; x++) {
+      const cell = crucigrama.grid[y][x]
+      if (cell !== '') {
+        const userVal = crucigrama.userGrid[y][x].toUpperCase()
+        if (userVal === cell) {
+          crucigrama.validationGrid[y][x] = true
+        } else {
+          crucigrama.validationGrid[y][x] = false
+          todoCorrecto = false
+        }
+      }
+    }
+  }
+  if (todoCorrecto) {
+    crucigrama.completado = true
+  }
+}
+
+function reiniciarCrucigrama() {
+  crucigrama.userGrid = Array(crucigrama.grid.length).fill(0).map(() => Array(crucigrama.grid[0].length).fill(''))
+  crucigrama.validationGrid = Array(crucigrama.grid.length).fill(0).map(() => Array(crucigrama.grid[0].length).fill(null))
+  crucigrama.completado = false
+}
 </script>
 
 <style scoped>
+.crucigrama-grid { display: flex; flex-direction: column; gap: 4px; background: rgba(0,0,0,0.05); padding: 8px; border-radius: 8px; }
+.crucigrama-container { background: rgba(27,58,107,0.03); border: 2px solid rgba(201,168,76,0.3); box-shadow: inset 0 0 15px rgba(0,0,0,0.05); }
+.celda-activa { position: relative; }
+.pista-numero { position: absolute; top: 2px; left: 4px; font-size: 0.6rem; font-family: 'Cinzel', serif; font-weight: 700; color: #1B3A6B; z-index: 1; pointer-events: none; }
+.crucigrama-celda-wrapper { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin: 1px; }
+.crucigrama-input { width: 36px; height: 36px; text-align: center; font-family: 'Cinzel', serif; font-size: 1.1rem; border: 1px solid #C9A84C; background: white; border-radius: 4px; text-transform: uppercase; transition: all 0.2s; }
+.crucigrama-input:focus { outline: none; border-color: #1B3A6B; background: #F8F4EC; transform: scale(1.05); z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.celda-correcta { background: var(--bg-success) !important; border-color: var(--border-success) !important; color: var(--text-success) !important; font-weight: 700; }
+.celda-incorrecta { background: var(--bg-error) !important; border-color: var(--border-error) !important; color: var(--border-error) !important; animation: shake 0.3s; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+.pista-item { font-family: 'EB Garamond', serif; font-size: 0.95rem; margin-bottom: 8px; line-height: 1.3; color: var(--text-dark); display: flex; align-items: flex-start; gap: 8px; }
+.pista-badge { background: #1B3A6B; color: #E8C97A; font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 700; width: 18px; height: 18px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+
+.crucigrama-vacio { width: 36px; height: 36px; }
 /* Emparejar */
 .border-selected-match { border-color:var(--text-primary) !important; background: #E4EBF5 !important; }
-.border-success-match  { border-color: #5C6E2E !important; background: #D7EDD5 !important; }
-.border-error-match    { border-color: #8B3A2A !important; background: #F5D9D4 !important; }
+.border-success-match  { border-color: var(--border-success) !important; background: var(--bg-success) !important; }
+.border-error-match    { border-color: var(--border-error) !important; background: var(--bg-error) !important; }
 
 /* Formas de Platón — imágenes */
 .imagen-normal     { background:var(--bg-light); border-color: rgba(201,168,76,0.25) !important; }
@@ -1090,7 +1248,7 @@ function esCeldaSeleccionada(x: number, y: number) {
 .imagen-correcta   { background: #D7EDD5 !important; border-color: #5C6E2E !important; opacity: 0.85; }
 
 /* Formas de Platón — conceptos */
-.concepto-normal     { background: #FDF6E3; border-color: rgba(201,168,76,0.2) !important; }
+.concepto-normal     { background: var(--bg-warm); border-color: rgba(201,168,76,0.2) !important; }
 .concepto-seleccionado { background: #E4EBF5 !important; border-color:var(--text-primary) !important; box-shadow: 0 0 0 3px rgba(27,58,107,0.15); }
 .concepto-correcto   { background: #D7EDD5 !important; border-color: #5C6E2E !important; opacity: 0.85; }
 

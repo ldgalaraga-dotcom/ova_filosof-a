@@ -1,3 +1,12 @@
+<script setup lang="ts">
+useHead({
+  link: [
+    { rel: 'icon', type: 'image/png', href: '/img/agora.png' },
+    { rel: 'apple-touch-icon', href: '/img/agora.png' }
+  ]
+})
+</script>
+
 <template>
   <NuxtLayout>
     <transition name="page" mode="out-in">
@@ -11,17 +20,35 @@
   --text-dark: #2C2416;
   --text-muted: #555555;
   --text-primary: #1B3A6B;
+  --text-secondary: #5A5040;
+  --text-link: #1B3A6B;
+  --text-success: #5C6E2E;
   --bg-card: #FFFFFF;
   --bg-light: #F8F4EC;
   --bg-hover: #FDF8EE;
+  --bg-subtle: #F5F0E8;
+  --bg-warm: #FDFAF3;
+  --bg-success: #D7EDD5;
+  --bg-error: #F5D9D4;
+  --border-success: #5C6E2E;
+  --border-error: #8B3A2A;
 }
 .v-theme--dark, .dark-mode {
   --text-dark: #E8C97A;
   --text-muted: #B0A48C;
   --text-primary: #E8C97A;
+  --text-secondary: #C9A84C;
+  --text-link: #E8C97A;
+  --text-success: #AED581;
   --bg-card: rgba(22, 18, 14, 0.92);
   --bg-light: rgba(201, 168, 76, 0.08);
   --bg-hover: rgba(255, 255, 255, 0.05);
+  --bg-subtle: rgba(201, 168, 76, 0.06);
+  --bg-warm: rgba(201, 168, 76, 0.04);
+  --bg-success: rgba(139, 195, 74, 0.15);
+  --bg-error: rgba(229, 57, 53, 0.15);
+  --border-success: #8BC34A;
+  --border-error: #EF5350;
 }
 
 /* Page Transitions */

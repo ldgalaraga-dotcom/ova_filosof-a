@@ -33,7 +33,7 @@
       </div>
 
       <!-- Descripción -->
-      <div style="font-family:'EB Garamond',serif;font-size:0.95rem;font-style:italic;color:#5A5040;line-height:1.5;margin-bottom:12px">
+      <div style="font-family:'EB Garamond',serif;font-size:0.95rem;font-style:italic;color:var(--text-secondary);line-height:1.5;margin-bottom:12px">
         {{ video.descripcion }}
       </div>
 
@@ -178,7 +178,7 @@ onBeforeUnmount(() => {
 }
 
 .reflexion-panel {
-  background: linear-gradient(135deg,#F8F4EC,#EEE8D8);
+  background: linear-gradient(135deg,var(--bg-subtle),var(--bg-light));
   border: 1px solid rgba(201,168,76,0.4);
   border-radius: 12px;
   padding: 14px;
@@ -201,7 +201,7 @@ onBeforeUnmount(() => {
 .reflexion-guardada {
   font-family: 'EB Garamond', serif;
   font-size: 0.9rem;
-  color: #5C6E2E;
+  color: var(--text-success);
   font-style: italic;
 }
 </style>

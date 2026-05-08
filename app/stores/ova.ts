@@ -15,9 +15,9 @@ export const useOvaStore = defineStore('ova', {
     completedActivities: [] as number[],
     evaluationScore: null as number | null,
     evaluationCompleted: false,
+    evaluationHistory: [] as { fecha: string; score: number; grade: number }[],
     visitedPages: [] as string[],
     watchedVideos: [] as number[],
-    reflexiones: [] as { fecha: string; tema: string; texto: string }[],
     fontSize: 'normal' as 'small' | 'normal' | 'large',
     ttsSpeed: 'normal' as 'slow' | 'normal' | 'fast',
     darkMode: false,
@@ -34,7 +34,6 @@ export const useOvaStore = defineStore('ova', {
       { id: 'eval100',     nombre: 'Sucesor de Sócrates',   descripcion: 'Obtuviste 100% en la evaluación',          icon: 'mdi-owl', obtenido: false },
       { id: 'explorador',  nombre: 'Explorador',            descripcion: 'Visitaste todas las secciones',            icon: 'mdi-map-search-outline', obtenido: false },
       { id: 'madrugador',  nombre: 'Alma Filosófica',       descripcion: 'Iniciaste la jornada filosófica',          icon: 'mdi-weather-sunset-up', obtenido: false },
-      { id: 'reflexivo',   nombre: 'Filósofo Reflexivo',    descripcion: 'Escribiste 3 reflexiones',                 icon: 'mdi-feather', obtenido: false },
       { id: 'recursos',    nombre: 'Bibliófilo',            descripcion: 'Visitaste la sección de recursos',         icon: 'mdi-book-open-page-variant', obtenido: false },
       { id: 'constante',   nombre: 'Mente Constante',       descripcion: 'Completaste actividades y evaluación',     icon: 'mdi-lightning-bolt', obtenido: false },
       { id: 'maestro',     nombre: 'Maestro del Ágora',     descripcion: 'Desbloqueaste todos los logros',           icon: 'mdi-trophy-award', obtenido: false },
@@ -44,7 +43,7 @@ export const useOvaStore = defineStore('ova', {
 
   getters: {
     progress: (state) => {
-      const total = 7
+      const total = 6
       const visited = new Set(state.visitedPages).size
       return Math.min(Math.round((visited / total) * 100), 100)
     },
@@ -56,6 +55,13 @@ export const useOvaStore = defineStore('ova', {
       evaluationDone: state.evaluationCompleted,
     }),
     activitiesCompleted: (state) => state.completedActivities.length,
+    evaluationGrade: (state) => {
+      if (state.evaluationScore === null) return 0
+      // Escala 0.1 a 5.0
+      // 0% -> 0.1, 100% -> 5.0
+      const grade = (state.evaluationScore / 100) * (5.0 - 0.1) + 0.1
+      return Math.round(grade * 10) / 10
+    },
     scoreLabel: (state) => {
       if (state.evaluationScore === null) return 'Sin evaluar'
       if (state.evaluationScore >= 80) return '¡Excelente!'
@@ -76,7 +82,7 @@ export const useOvaStore = defineStore('ova', {
       }
       this._desbloquearLogro('bienvenida')
       if (page === 'recursos') this._desbloquearLogro('recursos')
-      const paginas = ['contenido', 'actividades', 'reflexiones', 'evaluacion', 'recursos', 'creditos']
+      const paginas = ['contenido', 'actividades', 'evaluacion', 'recursos', 'creditos']
       if (paginas.every(p => this.visitedPages.includes(p))) {
         this._desbloquearLogro('explorador')
       }
@@ -103,6 +109,16 @@ export const useOvaStore = defineStore('ova', {
     setEvaluationScore(score: number) {
       this.evaluationScore = score
       this.evaluationCompleted = true
+      
+      const grade = (score / 100) * (5.0 - 0.1) + 0.1
+      const gradeRounded = Math.round(grade * 10) / 10
+      
+      this.evaluationHistory.push({
+        fecha: new Date().toLocaleDateString('es-CO', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        score,
+        grade: gradeRounded
+      })
+
       if (score >= 60) this._desbloquearLogro('eval60')
       if (score >= 80) this._desbloquearLogro('eval80')
       if (score === 100) this._desbloquearLogro('eval100')
@@ -117,14 +133,20 @@ export const useOvaStore = defineStore('ova', {
       this.completedActivities = []
       this.evaluationScore = null
       this.evaluationCompleted = false
+      this.evaluationHistory = []
       this.visitedPages = []
       this.watchedVideos = []
-      this.reflexiones = []
+      this.fontSize = 'normal'
+      this.ttsSpeed = 'normal'
+      this.darkMode = false
       this.logros.forEach(l => {
         l.obtenido = false
         l.fecha = undefined
       })
       this.logroReciente = null
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('ova') // Clear persisted state explicitly if needed
+      }
     },
     toggleDarkMode() {
       this.darkMode = !this.darkMode
@@ -146,16 +168,6 @@ export const useOvaStore = defineStore('ova', {
             setTimeout(() => this._desbloquearLogro('maestro'), 1500)
           }
         }
-      }
-    },
-    agregarReflexion(tema: string, texto: string) {
-      this.reflexiones.push({
-        fecha: new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        tema,
-        texto
-      })
-      if (this.reflexiones.length >= 3) {
-        this._desbloquearLogro('reflexivo')
       }
     }
   },

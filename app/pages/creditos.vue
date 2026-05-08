@@ -106,7 +106,7 @@
     </v-card>
 
     <!-- Licencia -->
-    <v-card rounded="lg" elevation="1" class="mb-8" style="background:#F5F0E8;border:1px solid rgba(201,168,76,0.3)">
+    <v-card rounded="lg" elevation="1" class="mb-8" style="background:var(--bg-subtle);border:1px solid rgba(201,168,76,0.3)">
       <v-card-text class="pa-4 text-center d-flex flex-column align-center"
         style="font-family:'EB Garamond',serif;font-size:0.9rem;color:var(--text-muted);line-height:1.8;font-style:italic">
         <div>
@@ -136,14 +136,14 @@
             
             <h3 style="font-family:'Cinzel',serif;color:var(--text-primary);border-bottom:1px solid rgba(201,168,76,0.5);padding-bottom:4px;margin-top:0;"><v-icon size="20" class="mr-2">mdi-bookshelf</v-icon> Tecnologías de Desarrollo</h3>
             <ul class="mb-4 pl-5">
-              <li><strong>Framework Principal:</strong> <a href="https://nuxt.com/" target="_blank" style="color:#1B3A6B;text-decoration:none;font-weight:bold;">Nuxt 3</a> & <a href="https://vuejs.org/" target="_blank" style="color:#1B3A6B;text-decoration:none;font-weight:bold;">Vue.js 3</a> (Licencia MIT)</li>
-              <li><strong>Librería de Componentes:</strong> <a href="https://vuetifyjs.com/" target="_blank" style="color:#1B3A6B;text-decoration:none;font-weight:bold;">Vuetify 3</a> (Licencia MIT)</li>
-              <li><strong>Gestión de Estado:</strong> <a href="https://pinia.vuejs.org/" target="_blank" style="color:#1B3A6B;text-decoration:none;font-weight:bold;">Pinia</a> (Licencia MIT)</li>
+              <li><strong>Framework Principal:</strong> <a href="https://nuxt.com/" target="_blank" style="color:var(--text-link);text-decoration:none;font-weight:bold;">Nuxt 3</a> & <a href="https://vuejs.org/" target="_blank" style="color:var(--text-link);text-decoration:none;font-weight:bold;">Vue.js 3</a> (Licencia MIT)</li>
+              <li><strong>Librería de Componentes:</strong> <a href="https://vuetifyjs.com/" target="_blank" style="color:var(--text-link);text-decoration:none;font-weight:bold;">Vuetify 3</a> (Licencia MIT)</li>
+              <li><strong>Gestión de Estado:</strong> <a href="https://pinia.vuejs.org/" target="_blank" style="color:var(--text-link);text-decoration:none;font-weight:bold;">Pinia</a> (Licencia MIT)</li>
             </ul>
 
             <h3 style="font-family:'Cinzel',serif;color:var(--text-primary);border-bottom:1px solid rgba(201,168,76,0.5);padding-bottom:4px;"><v-icon size="20" class="mr-2">mdi-palette</v-icon> Recursos Visuales e Imágenes</h3>
             <ul class="mb-4 pl-5">
-              <li><strong>Tipografías:</strong> <a href="https://fonts.google.com/" target="_blank" style="color:#1B3A6B;text-decoration:none;font-weight:bold;">Cinzel y EB Garamond</a> por Google Fonts (OFL - Open Font License).</li>
+              <li><strong>Tipografías:</strong> <a href="https://fonts.google.com/" target="_blank" style="color:var(--text-link);text-decoration:none;font-weight:bold;">Cinzel y EB Garamond</a> por Google Fonts (OFL - Open Font License).</li>
               <li><strong>Íconos:</strong> Material Design Icons (Licencia Apache 2.0).</li>
               <li><strong>Retratos de Filósofos (Línea de Tiempo):</strong> Imágenes generadas sintéticamente a través de inteligencia artificial generativa exclusivamente para fines ilustrativos y educativos.</li>
             </ul>
@@ -179,12 +179,10 @@ onMounted(() => tienda.markPageVisited('creditos'))
 const equipo = [
   { nombre: 'Patricia Barroso Berrocal', rol: 'Dirección Pedagógica', icon: 'mdi-school', color: 'primary',   descripcion: 'Docente de Filosofía — Diseño curricular y validación del aprendizaje.' },
   { nombre: 'Luis Galaraga',             rol: 'Lógica e Integración',  icon: 'mdi-laptop', color: 'accent',    descripcion: 'Encargado de la lógica e integración de actividades del OVA.', imagen: '/img/Luis Galaraga.jpeg' },
+  { nombre: 'Sayeth Pacheco',            rol: 'Programación',         icon: 'mdi-laptop', color: 'accent',    descripcion: 'Programador y soporte técnico del proyecto.', imagen: '/img/sayeth pacheco.jpeg' },
   { nombre: 'Lina Franco',               rol: 'Diseño y Estética',     icon: 'mdi-laptop', color: 'accent',    descripcion: 'Encargada del diseño y estética de la interfaz.', imagen: '/img/Lina Franco.jpeg' },
-  { nombre: 'Jesus Diaz Arteaga',        rol: 'Programación',         icon: 'mdi-laptop', color: 'accent',    descripcion: 'Apoyo en programación y asistencia técnica del proyecto.', imagen: '/img/Jesus Diaz Arteaga.jpeg' },
-  { nombre: 'Psicología Educativa',      rol: 'Diseño Inclusivo',     icon: 'mdi-brain', color: 'success',   descripcion: 'Adaptación de contenidos para educación inclusiva.' },
-  { nombre: 'Rector/a',                  rol: 'Dirección Inst.',      icon: 'mdi-pillar', color: 'secondary', descripcion: 'Apoyo institucional y gestión de recursos.' },
+  { nombre: 'Jesus Diaz Arteaga',        rol: 'Programación',         icon: 'mdi-laptop', color: 'accent',    descripcion: 'Desarrollador asistente y tester técnico del proyecto.', imagen: '/img/Jesus Diaz Arteaga.jpeg' },
   { nombre: 'Estudiantes Piloto',        rol: 'Pruebas',              icon: 'mdi-star-shooting', color: 'warning',   descripcion: 'Grados X y XI que probaron y evaluaron el OVA.' },
-  { nombre: 'Padres de Familia',         rol: 'Comunidad',            icon: 'mdi-heart', color: 'error',     descripcion: 'Apoyo continuo al aprendizaje desde el hogar.' },
 ]
 
 const caracteristicas = [

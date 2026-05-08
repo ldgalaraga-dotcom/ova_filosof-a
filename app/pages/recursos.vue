@@ -3,7 +3,7 @@
     <div class="d-flex align-center mb-5">
       <v-icon color="accent" size="38" class="mr-3">mdi-bookshelf</v-icon>
       <div>
-        <h1 style="font-family:'Cinzel',serif;font-size:1.9rem;color:#00838F;line-height:1.1">Recursos</h1>
+        <h1 style="font-family:'Cinzel',serif;font-size:1.9rem;color:var(--text-primary);line-height:1.1">Recursos</h1>
         <div style="color:var(--text-muted);font-size:0.95rem">Material extra para seguir aprendiendo <v-icon size="16">mdi-bookshelf</v-icon></div>
       </div>
     </div>

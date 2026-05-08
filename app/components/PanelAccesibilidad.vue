@@ -8,7 +8,7 @@
 
     <!-- Modo oscuro -->
     <div class="mb-4">
-      <div style="font-family:'EB Garamond',serif;font-size:0.9rem;color:#5A5040;margin-bottom:6px;font-weight:600">
+      <div style="font-family:'EB Garamond',serif;font-size:0.9rem;color:var(--text-secondary);margin-bottom:6px;font-weight:600">
         Modo de visualización:
       </div>
       <div class="d-flex gap-2">
@@ -37,7 +37,7 @@
 
     <!-- Control de velocidad de texto -->
     <div class="mb-4">
-      <div style="font-family:'EB Garamond',serif;font-size:0.9rem;color:#5A5040;margin-bottom:6px;font-weight:600">
+      <div style="font-family:'EB Garamond',serif;font-size:0.9rem;color:var(--text-secondary);margin-bottom:6px;font-weight:600">
         Velocidad de lectura:
       </div>
       <div class="d-flex gap-2">
@@ -59,7 +59,7 @@
 
     <!-- Control de tamaño de fuente -->
     <div>
-      <div style="font-family:'EB Garamond',serif;font-size:0.9rem;color:#5A5040;margin-bottom:6px;font-weight:600">
+      <div style="font-family:'EB Garamond',serif;font-size:0.9rem;color:var(--text-secondary);margin-bottom:6px;font-weight:600">
         Tamaño de fuente:
       </div>
       <div class="d-flex gap-2">

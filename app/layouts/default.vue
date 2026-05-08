@@ -50,10 +50,10 @@
               </v-list-item-title>
             </v-list-item>
             <v-divider />
-            <v-list-item prepend-icon="mdi-account-edit" @click="cambiarNombre" style="cursor:pointer">
+            <v-list-item link prepend-icon="mdi-account-edit" @click="cambiarNombre">
               <v-list-item-title style="font-size:0.82rem">Cambiar nombre</v-list-item-title>
             </v-list-item>
-            <v-list-item prepend-icon="mdi-logout" @click="cerrarSesion" style="cursor:pointer; color:#b71c1c;">
+            <v-list-item link prepend-icon="mdi-logout" @click="cerrarSesion" style="color:#b71c1c;">
               <v-list-item-title style="font-size:0.82rem">Cerrar sesión y reiniciar</v-list-item-title>
             </v-list-item>
           </v-list>
@@ -79,7 +79,7 @@
 
       <div class="pa-4 pb-2">
         <div v-if="tienda.studentName" class="text-center">
-          <div><v-icon size="36" color="#C9A84C">mdi-pillar</v-icon></div>
+          <div><v-icon size="36" color="#C9A84C">{{ iconoPaginaActual }}</v-icon></div>
           <div style="font-family:'Cinzel',serif;font-weight:700;font-size:0.95rem;margin-top:6px;letter-spacing:0.05em"
             :style="tienda.darkMode ? 'color:#C9A84C' : 'color:var(--text-primary)'">
             {{ tienda.studentName }}
@@ -320,6 +320,48 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+
+    <!-- ===== DIALOG CONFIRMACIÓN CIERRE SESIÓN ===== -->
+    <v-dialog v-model="mostrarConfirmarCerrar" max-width="400">
+      <v-card rounded="xl" class="pa-4 text-center">
+        <v-card-title class="justify-center">
+          <v-icon size="64" color="error" class="mb-4">mdi-alert-circle-outline</v-icon>
+          <div style="font-family:'Cinzel',serif; white-space: normal;">¿Cerrar sesión y reiniciar?</div>
+        </v-card-title>
+        <v-card-text style="font-family:'EB Garamond',serif; font-size: 1.1rem;">
+          Se borrará todo tu progreso y logros. Esta acción no se puede deshacer.
+        </v-card-text>
+        <v-card-actions class="justify-center gap-2 mt-4">
+          <v-btn variant="outlined" rounded="lg" @click="mostrarConfirmarCerrar = false" style="font-family:'Cinzel',serif;">Cancelar</v-btn>
+          <v-btn color="error" variant="flat" rounded="lg" @click="confirmarCierreSesion" style="font-family:'Cinzel',serif;">Sí, reiniciar todo</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- ===== PIE DE PÁGINA INSTITUCIONAL ===== -->
+    <v-footer
+      app
+      border
+      class="py-2 px-4 institucional-footer"
+      :style="tienda.darkMode 
+        ? 'background: #16120E; border-top: 1px solid rgba(201,168,76,0.3); color: #E8C97A' 
+        : 'background: #F8F4EC; border-top: 1px solid rgba(201,168,76,0.4); color: #1B3A6B'"
+    >
+      <div class="w-100 d-flex flex-column flex-sm-row align-center justify-space-between gap-2">
+        <div class="d-flex align-center" style="gap: 12px">
+          <div class="footer-logo-container">
+            <img src="/img/Escudo Universidad de Cordoba.jpg" alt="Logo Universidad de Córdoba" class="footer-logo" />
+          </div>
+          <div class="footer-info">
+            <div class="universidad-nombre">Universidad de Córdoba</div>
+            <div class="carrera-nombre">Licenciatura en Informática</div>
+          </div>
+        </div>
+        
+        <div class="footer-copyright">
+          Ágora · Filosofía para Todos · MMXXVI
+        </div>
+      </div>
+    </v-footer>
   </v-app>
 </template>
 
@@ -335,6 +377,7 @@ const enrutador = useRouter()
 const estandoLeyendo = ref(false)
 const mostrarLogros = ref(false)
 const mostrarAccesibilidad = ref(false)
+const mostrarConfirmarCerrar = ref(false)
 
 const opcionesFuente = [
   { val: 'small' as const, etiq: 'A−' },
@@ -356,14 +399,24 @@ watch(pantallaGrande, val => { mostrarMenu.value = val })
 watch(() => rutaActual.path, () => detenerLectura())
 
 function cambiarNombre() {
+  console.log('Cambiando nombre...')
   tienda.studentName = ''
-  navigateTo('/')
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('ova')
+    window.location.href = '/'
+  }
 }
 
 function cerrarSesion() {
-  if (confirm('¿Estás seguro de que deseas cerrar sesión? Se borrará todo tu progreso y logros.')) {
-    tienda.resetTodo()
-    navigateTo('/')
+  mostrarConfirmarCerrar.value = true
+}
+
+function confirmarCierreSesion() {
+  console.log('Confirmado: Reiniciando OVA...')
+  tienda.resetTodo()
+  if (typeof window !== 'undefined') {
+    localStorage.clear()
+    window.location.href = '/'
   }
 }
 
@@ -396,11 +449,15 @@ function alternarLectura() {
 const elementosNav = [
   { ruta: '/contenido',   icono: 'mdi-play-circle',         etiqueta: '▷ Contenido' },
   { ruta: '/actividades', icono: 'mdi-pencil-box-multiple', etiqueta: '✎ Actividades' },
-  { ruta: '/reflexiones', icono: 'mdi-book-open-page-variant', etiqueta: '✍ Reflexiones' },
   { ruta: '/recursos',    icono: 'mdi-bookshelf',           etiqueta: 'Recursos' },
   { ruta: '/evaluacion',  icono: 'mdi-clipboard-check',     etiqueta: 'Evaluación' },
   { ruta: '/creditos',    icono: 'mdi-account-group',       etiqueta: 'Créditos' },
 ]
+
+const iconoPaginaActual = computed(() => {
+  const encontrado = elementosNav.find(e => rutaActual.path === e.ruta)
+  return encontrado ? encontrado.icono : 'mdi-pillar'
+})
 
 function generarCertificado() {
   const nombre = tienda.studentName || 'Estudiante Filósofo'
@@ -607,4 +664,77 @@ button, [role="button"], a, input, select, textarea,
 
 /* Excepción: chips decorativos que no necesitan ser interactivos */
 .v-chip--disabled { min-height: unset; min-width: unset; }
+
+/* ===== PIE DE PÁGINA INSTITUCIONAL ===== */
+.institucional-footer {
+  transition: background-color 0.3s, color 0.3s;
+  z-index: 100;
+}
+
+.footer-logo-container {
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 8px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.footer-logo {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-info {
+  font-family: 'Cinzel', serif;
+  line-height: 1.2;
+}
+
+.universidad-nombre {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.carrera-nombre {
+  font-size: 0.7rem;
+  opacity: 0.8;
+  letter-spacing: 0.02em;
+}
+
+.footer-copyright {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+@media (max-width: 600px) {
+  .institucional-footer {
+    padding: 8px !important;
+  }
+  /* Mover el botón TTS más arriba en móvil para que no tape el footer */
+  .v-btn[style*="fixed"] {
+    bottom: 70px !important;
+  }
+  .footer-logo-container {
+    width: 32px;
+    height: 32px;
+  }
+  .universidad-nombre {
+    font-size: 0.75rem;
+  }
+  .carrera-nombre {
+    display: none; /* Ocultar carrera en pantallas muy pequeñas para ahorrar espacio */
+  }
+  .footer-copyright {
+    font-size: 0.55rem;
+    margin-top: 4px;
+  }
+}
 </style>

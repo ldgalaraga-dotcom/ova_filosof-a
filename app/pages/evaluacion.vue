@@ -27,8 +27,11 @@
         <div v-if="tienda.studentName" style="font-family:'EB Garamond',serif;font-size:1.1rem;color:var(--text-muted);font-style:italic;margin-bottom:16px">
           {{ tienda.studentName }}, {{ tienda.evaluationScore >= 80 ? 'has demostrado una comprensión sobresaliente de la filosofía.' : 'sigue explorando y pronto dominarás el ágora.' }}
         </div>
-        <div style="font-size:3rem;font-weight:900;color:var(--text-primary);margin-bottom:20px">
-          {{ tienda.evaluationScore }}%
+        <div style="font-size:3rem;font-weight:900;color:var(--text-primary);margin-bottom:20px; display:flex; align-items:center; justify-content:center; gap:20px;">
+          <v-chip color="secondary" size="x-large" variant="flat" style="font-size:2rem; padding: 24px; font-family:'Cinzel',serif">
+            {{ tienda.evaluationGrade }} / 5.0
+          </v-chip>
+          <span style="font-size:2rem; opacity:0.6">{{ tienda.evaluationScore }}%</span>
         </div>
         <v-progress-linear
           :model-value="tienda.evaluationScore ?? 0"
@@ -83,12 +86,38 @@
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
+        
+        <!-- REGISTRO DE NOTAS -->
+        <div v-if="tienda.evaluationHistory.length > 1" class="mb-6">
+          <div style="font-family:'Cinzel',serif; font-size:1.1rem; color:var(--text-primary); margin-bottom:12px; text-align:left; border-bottom:1px solid rgba(201,168,76,0.3); padding-bottom:6px">
+            <v-icon class="mr-2">mdi-history</v-icon> Registro de Notas
+          </div>
+          <v-table density="compact" class="rounded-lg" style="background:transparent; border:1px solid rgba(201,168,76,0.2)">
+            <thead>
+              <tr style="font-family:'Cinzel',serif; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em">
+                <th class="text-left">Fecha</th>
+                <th class="text-center">Porcentaje</th>
+                <th class="text-center">Nota (0.1-5.0)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(h, idx) in tienda.evaluationHistory" :key="idx" style="font-family:'EB Garamond',serif; font-size:1rem">
+                <td class="text-left">{{ h.fecha }}</td>
+                <td class="text-center">{{ h.score }}%</td>
+                <td class="text-center"><strong>{{ h.grade.toFixed(1) }}</strong></td>
+              </tr>
+            </tbody>
+          </v-table>
+        </div>
 
         <div class="d-flex justify-center gap-3 flex-wrap">
           <v-btn color="primary" size="large" rounded="xl" prepend-icon="mdi-refresh" @click="reiniciarEvaluacion">
             Intentar de nuevo
           </v-btn>
-          <v-btn v-if="tienda.evaluationScore >= 60" color="success" size="large" rounded="xl" prepend-icon="mdi-certificate" @click="generarCertificado">
+          <v-btn v-if="tienda.logros.every(l => l.obtenido)" color="secondary" size="large" rounded="xl" prepend-icon="mdi-trophy-award" @click="generarCertificado">
+            Descargar Certificado Maestro
+          </v-btn>
+          <v-btn v-else-if="tienda.evaluationScore >= 60" color="success" size="large" rounded="xl" prepend-icon="mdi-certificate" @click="generarCertificado">
             Descargar Certificado
           </v-btn>
           <v-btn color="secondary" size="large" rounded="xl" to="/recursos" prepend-icon="mdi-bookshelf">
@@ -288,8 +317,11 @@
         <div class="otorgado" style="font-size:1rem; color:#2C2416; font-family:'EB Garamond',serif; margin:10px 0 4px;">Se otorga el presente certificado a</div>
         <div class="nombre" style="font-family:'Cinzel',serif; font-size:2.2rem; color:#1B3A6B; font-weight:700; margin:4px 0 14px; letter-spacing:0.04em;">{{ tienda.studentName || 'Estudiante' }}</div>
         <div class="desc" style="font-size:0.95rem; color:#5A5040; font-family:'EB Garamond',serif; line-height:1.7; max-width:520px; margin:0 auto 18px;">por haber completado satisfactoriamente la evaluación del OVA<br>demostrando comprensión y dominio de los fundamentos filosóficos.</div>
-        <div class="puntaje" style="font-family:'Cinzel',serif; font-size:3rem; font-weight:700; color:#C9A84C; margin:4px 0;">{{ tienda.evaluationScore ?? 0 }}%</div>
-        <div class="puntaje-label" style="font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:#555;">Calificación obtenida</div>
+        <div class="puntaje" style="font-family:'Cinzel',serif; font-size:3rem; font-weight:700; color:#C9A84C; margin:4px 0; display:flex; align-items:center; justify-content:center; gap:20px;">
+          <span>{{ tienda.evaluationGrade.toFixed(1) }} / 5.0</span>
+          <span style="font-size:1.5rem; opacity:0.6">({{ tienda.evaluationScore ?? 0 }}%)</span>
+        </div>
+        <div class="puntaje-label" style="font-family:'Cinzel',serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:#555;">Calificación y Desempeño</div>
         <div class="sep" style="display:flex; align-items:center; gap:12px; margin:8px auto; max-width:300px;"><div style="flex:1; height:1px; background:#C9A84C;"></div><span style="color:#C9A84C; font-size:1rem;">⬥</span><div style="flex:1; height:1px; background:#C9A84C;"></div></div>
         <div class="fecha" style="font-size:0.85rem; color:#555; font-family:'EB Garamond',serif; font-style:italic; margin-top:16px;">Expedido el {{ new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' }) }}</div>
         <div class="firma" style="font-family:'Cinzel',serif; font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:#1B3A6B; margin-top:8px;">
@@ -710,8 +742,8 @@ async function generarCertificado() {
 .opcion-btn:hover { border-color: #C9A84C; background:var(--bg-hover); }
 .opcion-normal     { background:var(--bg-light); }
 .opcion-seleccionada { background: #EDE7F6; border-color: #5E35B1 !important; }
-.opcion-correcta   { background: #C8E6C9; border-color: #43A047 !important; cursor: default; }
-.opcion-incorrecta { background: #FFCDD2; border-color: #E53935 !important; cursor: default; }
+.opcion-correcta   { background: var(--bg-success); border-color: var(--border-success) !important; cursor: default; }
+.opcion-incorrecta { background: var(--bg-error); border-color: var(--border-error) !important; cursor: default; }
 .opcion-letra { font-weight: 800; margin-right: 10px; color:var(--text-primary); font-family: 'Cinzel', serif; }
 
 .dot-resp {

@@ -244,7 +244,7 @@
     </v-row>
 
     <!-- ¿Sabías que? -->
-    <v-card rounded="xl" elevation="2" class="mb-6" style="border:1px solid rgba(201,168,76,0.35);background:linear-gradient(135deg,#FDFAF3,#F0EBD8)">
+    <v-card rounded="xl" elevation="2" class="mb-6" style="border:1px solid rgba(201,168,76,0.35);background:var(--bg-warm)">
       <v-card-title class="pa-5 pb-2 d-flex align-center">
         <v-icon size="28" color="#C9A84C" class="mr-3">mdi-lightbulb-on</v-icon>
         <span style="font-family:'Cinzel',serif;color:var(--text-primary);font-size:1rem;letter-spacing:0.08em">¿Sabías que...?</span>
@@ -519,7 +519,7 @@ onUnmounted(() => clearInterval(intervalo))
   font-family: 'Cinzel', serif;
   font-size: 1.15rem;
   font-weight: 700;
-  color: #1B3A6B;
+  color: var(--text-primary);
   margin-bottom: 6px;
   letter-spacing: 0.04em;
 }
@@ -527,7 +527,7 @@ onUnmounted(() => clearInterval(intervalo))
   font-family: 'EB Garamond', serif;
   font-size: 1.02rem;
   line-height: 1.65;
-  color: #333;
+  color: var(--text-dark);
   margin-bottom: 10px;
 }
 .detail-dato {

@@ -38,7 +38,7 @@
       <!-- Columna de Formulario -->
       <div class="columna-formulario">
         <div class="formulario-card">
-          <div class="formulario-deco"><v-icon size="40">mdi-pillar</v-icon></div>
+          <div class="formulario-deco"><img src="/img/agora.png" class="emblema-agora" alt="" /></div>
           <p class="formulario-pregunta">¿Quién eres, viajero del saber?</p>
           <p class="formulario-desc">Ingresa tu nombre para que el ágora te reconozca</p>
 
@@ -72,7 +72,7 @@
             :disabled="entrando"
           >
             <span class="btn-texto">
-              <span v-if="!entrando" class="d-flex align-center"><v-icon class="mr-2">mdi-pillar</v-icon> Entrar al Ágora</span>
+              <span v-if="!entrando" class="d-flex align-center"><img src="/img/agora.png" class="emblema-btn mr-2" alt="" /> Entrar al Ágora</span>
               <span v-else>Ingresando...</span>
             </span>
           </button>
@@ -84,12 +84,32 @@
       </div>
 
     </div>
+
+    <!-- Capa de Animación: Puertas Griegas -->
+    <div v-if="abriendoPuertas" class="puertas-overlay" :class="{ 'overlay-ready': animacionPuertas }">
+      <div class="puerta-cont puerta-izq-cont" :class="{ 'abrir': animacionPuertas }">
+        <div class="puerta-hoja">
+          <div class="puerta-decoracion">
+            <v-icon size="80" color="#E8C97A">mdi-pillar</v-icon>
+            <div class="marco-greca"></div>
+          </div>
+        </div>
+      </div>
+      <div class="puerta-cont puerta-der-cont" :class="{ 'abrir': animacionPuertas }">
+        <div class="puerta-hoja">
+          <div class="puerta-decoracion">
+            <v-icon size="80" color="#E8C97A">mdi-pillar</v-icon>
+            <div class="marco-greca"></div>
+          </div>
+        </div>
+      </div>
+      <div class="luz-fondo" :class="{ 'encender': animacionPuertas }"></div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useOvaStore } from '~/stores/ova'
-import { useAccessibility } from '~/composables/useAccessibility'
 
 definePageMeta({ layout: false })
 
@@ -100,6 +120,8 @@ const error = ref(false)
 const entrando = ref(false)
 const animado = ref(false)
 const inputNombre = ref<HTMLInputElement | null>(null)
+const abriendoPuertas = ref(false)
+const animacionPuertas = ref(false)
 
 onMounted(() => {
   if (tienda.studentName) {
@@ -120,7 +142,17 @@ function entrar() {
   error.value = false
   entrando.value = true
   tienda.studentName = nombreLimpio
-  setTimeout(() => { navigateTo('/contenido') }, 600)
+  
+  // Iniciar animación de puertas
+  abriendoPuertas.value = true
+  setTimeout(() => {
+    animacionPuertas.value = true
+  }, 50)
+  
+  // Navegar después de que las puertas se abran
+  setTimeout(() => { 
+    navigateTo('/contenido') 
+  }, 2200)
 }
 </script>
 
@@ -323,6 +355,30 @@ function entrar() {
 .mensaje-error { font-family:'EB Garamond',serif;font-size:0.9rem;color:#8B3A2A;margin-bottom:10px;padding:8px 12px;background:rgba(139,58,42,0.07);border-radius:8px;border-left:3px solid #8B3A2A; }
 .dark-mode .mensaje-error { color: #E57373; background: rgba(229,115,115,0.1); border-color: #E57373; }
 
+/* Emblemas Ágora (Stylized A) */
+.emblema-agora {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(201,168,76,0.4));
+  transition: transform 0.3s ease;
+}
+
+.formulario-card:hover .emblema-agora {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.emblema-btn {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(18%) sepia(54%) saturate(1214%) hue-rotate(193deg) brightness(96%) contrast(93%); /* Matching color #1B3A6B */
+}
+
+.dark-mode .emblema-btn {
+  filter: none; /* Keep original gold/yellow on dark mode if it fits */
+}
+
 .btn-entrar {
   width: 100%;
   padding: 14px 24px;
@@ -384,5 +440,95 @@ function entrar() {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Animación de Puertas Griegas */
+.puertas-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  perspective: 1500px;
+  overflow: hidden;
+  background: transparent;
+  pointer-events: all;
+}
+
+.puerta-cont {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  transition: transform 2.2s cubic-bezier(0.7, 0, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+.puerta-izq-cont { transform-origin: left center; }
+.puerta-der-cont { transform-origin: right center; }
+
+.puerta-cont.abrir.puerta-izq-cont {
+  transform: rotateY(-115deg);
+}
+
+.puerta-cont.abrir.puerta-der-cont {
+  transform: rotateY(115deg);
+}
+
+.puerta-hoja {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1B3A6B 0%, #112544 100%);
+  border: 8px double #C9A84C;
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.5), 0 0 30px rgba(201,168,76,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.puerta-izq-cont .puerta-hoja { border-right: 4px solid #C9A84C; border-left-width: 12px; }
+.puerta-der-cont .puerta-hoja { border-left: 4px solid #C9A84C; border-right-width: 12px; }
+
+.puerta-decoracion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  opacity: 0.8;
+}
+
+.marco-greca {
+  width: 120px;
+  height: 200px;
+  border: 2px solid #E8C97A;
+  position: relative;
+}
+
+.marco-greca::before, .marco-greca::after {
+  content: '◈';
+  position: absolute;
+  color: #E8C97A;
+  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
+}
+.marco-greca::before { top: -15px; }
+.marco-greca::after { bottom: -15px; }
+
+.luz-fondo {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, #F8F4EC 0%, transparent 70%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 1.5s ease;
+  pointer-events: none;
+}
+
+.luz-fondo.encender {
+  opacity: 0.8;
+}
+
+.overlay-ready {
+  background: rgba(0,0,0,0.1);
 }
 </style>
