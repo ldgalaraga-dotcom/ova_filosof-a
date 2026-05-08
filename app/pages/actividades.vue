@@ -99,7 +99,7 @@
     </v-row>
 
     <!-- Ventana de actividades -->
-    <v-window v-model="actividadActual" :touch="false">
+    <v-window v-model="actividadActual" :touch="{left: () => {}, right: () => {}}">
 
       <!-- ═══════════════════════════════
            ACTIVIDAD 1 — La Dialéctica
@@ -267,7 +267,7 @@
             </v-tabs>
           </div>
           
-          <v-window v-model="subActividadAcademia" :touch="false">
+          <v-window v-model="subActividadAcademia" :touch="{left: () => {}, right: () => {}}">
             <!-- Parte A: El Logos -->
             <v-window-item :value="0">
               <v-card-text class="pa-5">
