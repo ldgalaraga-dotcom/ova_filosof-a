@@ -61,4 +61,26 @@ useHead({
   opacity: 0;
   transform: translateY(10px);
 }
+
+/* ===== GLOBAL RESPONSIVE ===== */
+@media (max-width: 600px) {
+  /* Page titles */
+  h1 {
+    font-size: 1.3rem !important;
+  }
+  /* Reduce page padding on mobile */
+  .v-container {
+    padding: 12px !important;
+  }
+  /* Cards with large padding */
+  .pa-5 {
+    padding: 12px !important;
+  }
+  .pa-7 {
+    padding: 16px !important;
+  }
+  .mb-5 {
+    margin-bottom: 16px !important;
+  }
+}
 </style>

@@ -4,22 +4,18 @@
     <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
 
     <!-- ===== BARRA SUPERIOR ===== -->
-    <v-app-bar color="primary" elevation="4" height="72" role="banner">
+    <v-app-bar color="primary" elevation="4" class="app-header" role="banner">
       <template #prepend>
-        <div class="ml-3 d-flex align-center" style="gap:10px">
-          <div style="width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,0.9);border:2px solid rgba(201,168,76,0.8);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.25);padding:2px;">
+        <div class="ml-2 ml-md-3 d-flex align-center" style="gap:8px">
+          <div class="header-logo">
             <img src="/img/agora.png" alt="Logo Ágora" style="width:100%;height:100%;object-fit:contain;" />
           </div>
         </div>
       </template>
 
       <v-app-bar-title>
-        <div style="font-family:'Cinzel',serif;font-size:1.4rem;color:#E8C97A;letter-spacing:0.12em;text-transform:uppercase;font-weight:700">
-          Ágora
-        </div>
-        <div style="font-size:0.68rem;color:rgba(232,201,122,0.75);letter-spacing:0.15em;text-transform:uppercase;font-family:'Cinzel',serif">
-          Filosofía para Todos &nbsp;·&nbsp; OVA
-        </div>
+        <div class="header-title">Ágora</div>
+        <div class="header-subtitle d-none d-sm-block">Filosofía para Todos &nbsp;·&nbsp; OVA</div>
       </v-app-bar-title>
 
       <template #append>
@@ -38,7 +34,7 @@
         <!-- Nombre -->
         <v-menu v-if="tienda.studentName" location="bottom end">
           <template #activator="{ props: menuProps }">
-            <v-chip v-bind="menuProps" color="white" variant="outlined" size="small" class="mr-2" prepend-icon="mdi-laurel-wreath"
+            <v-chip v-bind="menuProps" color="white" variant="outlined" size="small" class="mr-2 d-none d-sm-inline-flex" prepend-icon="mdi-laurel-wreath"
               style="font-family:'Cinzel',serif;letter-spacing:0.05em;cursor:pointer;background:rgba(255,255,255,0.1)">
               {{ tienda.studentName }}
             </v-chip>
@@ -59,7 +55,7 @@
           </v-list>
         </v-menu>
 
-        <v-chip color="white" variant="outlined" size="small" class="mr-2" prepend-icon="mdi-star-four-points"
+        <v-chip color="white" variant="outlined" size="small" class="mr-1 d-none d-sm-inline-flex" prepend-icon="mdi-star-four-points"
           style="font-family:'Cinzel',serif;background:rgba(255,255,255,0.1)">
           {{ tienda.progress }}%
         </v-chip>
@@ -558,6 +554,54 @@ function generarCertificado() {
 .font-size-small  { font-size: 90% !important; }
 .font-size-normal { font-size: 100% !important; }
 .font-size-large  { font-size: 116% !important; }
+
+/* ===== APP BAR RESPONSIVE ===== */
+.app-header {
+  height: 72px !important;
+}
+.header-logo {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  border: 2px solid rgba(201,168,76,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  padding: 2px;
+  flex-shrink: 0;
+}
+.header-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  color: #E8C97A;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.header-subtitle {
+  font-size: 0.68rem;
+  color: rgba(232,201,122,0.75);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: 'Cinzel', serif;
+}
+
+@media (max-width: 600px) {
+  .app-header {
+    height: 56px !important;
+  }
+  .header-logo {
+    width: 38px;
+    height: 38px;
+  }
+  .header-title {
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+  }
+}
 
 .elemento-nav { transition: background 0.18s; }
 .v-theme--light .elemento-nav { color:var(--text-dark) !important; }
