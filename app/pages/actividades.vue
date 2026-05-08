@@ -405,6 +405,9 @@
               <v-icon color="secondary">mdi-format-letter-matches</v-icon>
               <span style="font-family:'Cinzel Decorative',serif;font-size:1.1rem;color:#E8C97A;letter-spacing:0.08em">Sopa de Letras</span>
             </div>
+            <div style="font-family:'EB Garamond',serif;font-style:italic;color:rgba(232,201,122,0.75);font-size:0.92rem">
+              Responde las preguntas buscando las palabras en la sopa. Haz clic en la primera letra y luego en la última. <v-icon size="16">mdi-magnify</v-icon>
+            </div>
           </div>
           <v-card-text class="pa-5 text-center">
             <div class="sopa-grid mb-4">
@@ -412,7 +415,49 @@
                 <div v-for="(letra, x) in fila" :key="'celda-'+x+'-'+y" class="sopa-celda" :class="{'celda-encontrada': esCeldaEncontrada(x, y), 'celda-seleccionada': esCeldaSeleccionada(x, y)}" @click="clickCeldaSopa(x, y)">{{ letra }}</div>
               </div>
             </div>
-            <div v-if="sopaLetras.completado" class="mt-5"><v-btn color="primary" @click="tienda.completeActivity(4)">Completar Actividad</v-btn></div>
+
+            <!-- Panel de preguntas -->
+            <div class="mx-auto" style="max-width:700px;text-align:left">
+              <div style="font-family:'Cinzel',serif;font-size:0.85rem;font-weight:700;color:var(--text-primary);letter-spacing:0.06em;margin-bottom:10px;text-transform:uppercase">
+                <v-icon size="18" class="mr-1">mdi-help-circle</v-icon> Pistas — Encuentra las respuestas
+              </div>
+              <div v-for="(palabra, idx) in sopaLetras.palabras" :key="'pista-'+palabra"
+                class="d-flex align-center gap-2 pa-2 mb-1 rounded-lg"
+                :style="sopaLetras.palabrasEncontradas.includes(palabra)
+                  ? 'background:var(--bg-success);border:1px solid var(--border-success)'
+                  : 'background:var(--bg-subtle);border:1px solid rgba(201,168,76,0.15)'"
+              >
+                <div style="min-width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:0.7rem;font-weight:700"
+                  :style="sopaLetras.palabrasEncontradas.includes(palabra)
+                    ? 'background:var(--border-success);color:white'
+                    : 'background:rgba(201,168,76,0.2);color:var(--text-primary)'"
+                >{{ idx + 1 }}</div>
+                <div style="flex:1;font-family:'EB Garamond',serif;font-size:0.92rem;color:var(--text-dark);line-height:1.3">
+                  {{ PISTAS_SOPA[palabra] }}
+                </div>
+                <div v-if="sopaLetras.palabrasEncontradas.includes(palabra)"
+                  style="font-family:'Cinzel',serif;font-size:0.78rem;font-weight:700;color:var(--text-success);letter-spacing:0.04em;white-space:nowrap">
+                  <v-icon size="14" class="mr-1">mdi-check-circle</v-icon>{{ palabra }}
+                </div>
+                <div v-else style="font-family:'Cinzel',serif;font-size:0.78rem;color:var(--text-muted);letter-spacing:0.04em">
+                  ? ? ?
+                </div>
+              </div>
+              <div class="text-center mt-3" style="font-family:'Cinzel',serif;font-size:0.75rem;color:var(--text-muted)">
+                {{ sopaLetras.palabrasEncontradas.length }} / {{ sopaLetras.palabras.length }} encontradas
+              </div>
+            </div>
+
+            <div v-if="sopaLetras.completado" class="mt-5 text-center">
+              <v-alert type="success" rounded="lg" class="mb-3" style="font-family:'EB Garamond',serif;font-size:1rem">
+                <v-icon color="success" class="mr-1">mdi-trophy-award</v-icon> ¡Magnífico! Has encontrado todos los conceptos filosóficos.
+              </v-alert>
+              <v-btn color="primary" rounded="lg"
+                style="font-family:'Cinzel',serif;letter-spacing:0.08em;text-transform:uppercase"
+                @click="tienda.completeActivity(4)">
+                <v-icon class="mr-1">mdi-check</v-icon> Completar actividad
+              </v-btn>
+            </div>
           </v-card-text>
         </v-card>
       </v-window-item>
@@ -609,15 +654,35 @@
               </div>
             </div>
 
-            <div class="d-flex flex-wrap gap-1 justify-center mx-auto" style="max-width:600px">
-              <v-chip v-for="palabra in sopaLetras.palabras" :key="palabra"
-                :color="sopaLetras.palabrasEncontradas.includes(palabra) ? 'success' : 'grey-darken-1'"
-                :variant="sopaLetras.palabrasEncontradas.includes(palabra) ? 'flat' : 'outlined'"
-                size="small"
-                style="font-family:'Cinzel',serif;font-size:0.7rem;font-weight:700"
+            <div class="mx-auto" style="max-width:700px;text-align:left">
+              <div style="font-family:'Cinzel',serif;font-size:0.85rem;font-weight:700;color:var(--text-primary);letter-spacing:0.06em;margin-bottom:10px;text-transform:uppercase">
+                <v-icon size="18" class="mr-1">mdi-help-circle</v-icon> Pistas — Encuentra las respuestas
+              </div>
+              <div v-for="(palabra, idx) in sopaLetras.palabras" :key="'pista-'+palabra"
+                class="d-flex align-center gap-2 pa-2 mb-1 rounded-lg"
+                :style="sopaLetras.palabrasEncontradas.includes(palabra)
+                  ? 'background:var(--bg-success);border:1px solid var(--border-success)'
+                  : 'background:var(--bg-subtle);border:1px solid rgba(201,168,76,0.15)'"
               >
-                {{ palabra }}
-              </v-chip>
+                <div style="min-width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:0.7rem;font-weight:700"
+                  :style="sopaLetras.palabrasEncontradas.includes(palabra)
+                    ? 'background:var(--border-success);color:white'
+                    : 'background:rgba(201,168,76,0.2);color:var(--text-primary)'"
+                >{{ idx + 1 }}</div>
+                <div style="flex:1;font-family:'EB Garamond',serif;font-size:0.92rem;color:var(--text-dark);line-height:1.3">
+                  {{ PISTAS_SOPA[palabra] }}
+                </div>
+                <div v-if="sopaLetras.palabrasEncontradas.includes(palabra)"
+                  style="font-family:'Cinzel',serif;font-size:0.78rem;font-weight:700;color:var(--text-success);letter-spacing:0.04em;white-space:nowrap">
+                  <v-icon size="14" class="mr-1">mdi-check-circle</v-icon>{{ palabra }}
+                </div>
+                <div v-else style="font-family:'Cinzel',serif;font-size:0.78rem;color:var(--text-muted);letter-spacing:0.04em">
+                  ? ? ?
+                </div>
+              </div>
+              <div class="text-center mt-3" style="font-family:'Cinzel',serif;font-size:0.75rem;color:var(--text-muted)">
+                {{ sopaLetras.palabrasEncontradas.length }} / {{ sopaLetras.palabras.length }} encontradas
+              </div>
             </div>
 
             <div v-if="sopaLetras.completado" class="mt-5 text-center">
@@ -981,6 +1046,29 @@ const PALABRAS_SOPA = [
   'CAVERNA', 'KANT', 'MARX', 'NIETZSCHE', 'MAYEUTICA', 'LIBERACION', 'SARTRE', 'DUSSEL'
 ]
 
+const PISTAS_SOPA: Record<string, string> = {
+  FILOSOFIA: '¿Cómo se le llama al amor por la sabiduría?',
+  SOCRATES: '¿Quién fue el maestro de Platón que no dejó escritos?',
+  PLATON: '¿Quién escribió "La República" y fundó la Academia?',
+  ARISTOTELES: '¿Quién es el padre de la lógica formal?',
+  ETICA: '¿Qué rama de la filosofía estudia la moral?',
+  COGITO: '¿Cuál es la palabra latina del "pienso, luego existo"?',
+  DIALECTICA: '¿Cómo se llama el método de argumentación por tesis, antítesis y síntesis?',
+  ALIENACION: '¿Qué concepto marxista describe la separación del trabajador de su producto?',
+  ACADEMIA: '¿Cómo se llamó la escuela fundada por Platón en Atenas?',
+  VERDAD: '¿Qué concepto busca toda investigación filosófica?',
+  RAZON: '¿Cuál es la capacidad humana de pensar críticamente?',
+  DESCARTES: '¿Quién fundó el racionalismo con la duda metódica?',
+  CAVERNA: '¿Cuál es la alegoría más famosa de Platón?',
+  KANT: '¿Quién formuló el imperativo categórico?',
+  MARX: '¿Quién dijo que la historia es una lucha de clases?',
+  NIETZSCHE: '¿Quién declaró "la muerte de Dios"?',
+  MAYEUTICA: '¿Cómo se llama el método socrático de hacer preguntas?',
+  LIBERACION: '¿Qué corriente filosófica latinoamericana propone pensar desde los oprimidos?',
+  SARTRE: '¿Quién dijo que "la existencia precede a la esencia"?',
+  DUSSEL: '¿Quién es el fundador de la Filosofía de la Liberación?',
+}
+
 const GRID_SIZE = 16
 
 const sopaLetras = reactive({
@@ -1152,16 +1240,16 @@ function inicializarCrucigrama() {
   crucigrama.validationGrid = Array(12).fill(0).map(() => Array(12).fill(null))
   
   crucigrama.hints = [
-    { id: 1, dir: 'H', row: 2, col: 2, text: 'Amor por la sabiduría.' },
-    { id: 2, dir: 'V', row: 1, col: 5, text: 'Maestro que no dejó escritos.' },
-    { id: 3, dir: 'H', row: 5, col: 5, text: 'Plaza pública de Atenas.' },
-    { id: 4, dir: 'V', row: 4, col: 7, text: 'Palabra, razón o discurso.' },
-    { id: 5, dir: 'H', row: 8, col: 1, text: 'Costumbre o carácter moral.' },
-    { id: 6, dir: 'V', row: 6, col: 1, text: 'Representación mental de algo.' },
-    { id: 7, dir: 'H', row: 9, col: 0, text: 'Capacidad de pensar críticamente.' },
-    { id: 8, dir: 'V', row: 3, col: 9, text: 'Autor de "La República".' },
-    { id: 9, dir: 'V', row: 1, col: 3, text: 'Relato simbólico tradicional.' },
-    { id: 10, dir: 'H', row: 1, col: 5, text: 'Concepto fundamental de Parménides.' },
+    { id: 1, dir: 'H', row: 2, col: 2, text: '¿Cómo se le llama al amor por la sabiduría?' },
+    { id: 2, dir: 'V', row: 1, col: 5, text: '¿Quién fue el gran maestro que no dejó escritos?' },
+    { id: 3, dir: 'H', row: 5, col: 5, text: '¿Cómo se llamaba la plaza pública de Atenas donde se debatía?' },
+    { id: 4, dir: 'V', row: 4, col: 7, text: '¿Qué término griego significa palabra, razón o discurso?' },
+    { id: 5, dir: 'H', row: 8, col: 1, text: '¿Qué palabra se refiere a la costumbre o carácter moral?' },
+    { id: 6, dir: 'V', row: 6, col: 1, text: '¿Cuál es el nombre de la representación mental de algo?' },
+    { id: 7, dir: 'H', row: 9, col: 0, text: '¿Cuál es la capacidad humana de pensar críticamente?' },
+    { id: 8, dir: 'V', row: 3, col: 9, text: '¿Quién fue el discípulo de Sócrates y autor de "La República"?' },
+    { id: 9, dir: 'V', row: 1, col: 3, text: '¿Cómo se llama el relato simbólico tradicional?' },
+    { id: 10, dir: 'H', row: 1, col: 5, text: '¿Cuál es el concepto fundamental de la metafísica de Parménides?' },
   ]
 }
 
