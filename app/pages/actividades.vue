@@ -1,16 +1,12 @@
 <template>
   <div>
     <!-- Encabezado -->
-    <div class="d-flex align-center justify-space-between mb-5">
+    <div class="d-flex align-center flex-wrap justify-space-between mb-4" style="gap:8px">
       <div class="d-flex align-center">
-        <v-icon color="secondary" size="38" class="mr-3">mdi-pencil-box-multiple</v-icon>
+        <v-icon color="secondary" size="28" class="mr-2">mdi-pencil-box-multiple</v-icon>
         <div>
-          <h1 style="font-family:'Cinzel',serif;font-size:1.8rem;color:#C9A84C;line-height:1.1;letter-spacing:0.06em;text-transform:uppercase">
-            Actividades
-          </h1>
-          <div style="color:var(--text-muted);font-size:0.92rem;font-family:'EB Garamond',serif;font-style:italic">
-            Ejercita tu razón como los grandes filósofos ✦
-          </div>
+          <h1 class="actividades-titulo">Actividades</h1>
+          <div class="actividades-subtitulo">Ejercita tu razón como los grandes filósofos ✦</div>
         </div>
       </div>
       <div class="d-flex flex-column align-end gap-2">
@@ -67,7 +63,7 @@
       <v-col v-for="(act, idx) in actividades" :key="idx" cols="6" sm="4" md="auto">
         <v-card
           rounded="lg" elevation="2"
-          style="cursor:pointer;transition:all .2s;min-width:110px;overflow:hidden"
+          class="actividad-card"
           :style="actividadActual === idx
             ? 'box-shadow:0 4px 18px rgba(27,58,107,0.22)'
             : 'box-shadow:none'"
@@ -1305,11 +1301,34 @@ function reiniciarCrucigrama() {
 </script>
 
 <style scoped>
+/* ===== HEADER & TABS ===== */
+.actividades-titulo {
+  font-family: 'Cinzel', serif;
+  font-size: 1.6rem;
+  color: #C9A84C;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.actividades-subtitulo {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+}
+.actividad-card {
+  cursor: pointer;
+  transition: all .2s;
+  min-width: 100px;
+  overflow: hidden;
+}
+
+/* ===== CRUCIGRAMA ===== */
 .crucigrama-grid { display: flex; flex-direction: column; gap: 4px; background: rgba(0,0,0,0.05); padding: 8px; border-radius: 8px; }
-.crucigrama-container { background: rgba(27,58,107,0.03); border: 2px solid rgba(201,168,76,0.3); box-shadow: inset 0 0 15px rgba(0,0,0,0.05); }
+.crucigrama-container { background: rgba(27,58,107,0.03); border: 2px solid rgba(201,168,76,0.3); box-shadow: inset 0 0 15px rgba(0,0,0,0.05); overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .celda-activa { position: relative; }
 .pista-numero { position: absolute; top: 2px; left: 4px; font-size: 0.6rem; font-family: 'Cinzel', serif; font-weight: 700; color: #1B3A6B; z-index: 1; pointer-events: none; }
-.crucigrama-celda-wrapper { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin: 1px; }
+.crucigrama-celda-wrapper { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin: 1px; flex-shrink: 0; }
 .crucigrama-input { width: 36px; height: 36px; text-align: center; font-family: 'Cinzel', serif; font-size: 1.1rem; border: 1px solid #C9A84C; background: white; border-radius: 4px; text-transform: uppercase; transition: all 0.2s; }
 .crucigrama-input:focus { outline: none; border-color: #1B3A6B; background: #F8F4EC; transform: scale(1.05); z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 .celda-correcta { background: var(--bg-success) !important; border-color: var(--border-success) !important; color: var(--text-success) !important; font-weight: 700; }
@@ -1324,23 +1343,24 @@ function reiniciarCrucigrama() {
 .pista-item { font-family: 'EB Garamond', serif; font-size: 0.95rem; margin-bottom: 8px; line-height: 1.3; color: var(--text-dark); display: flex; align-items: flex-start; gap: 8px; }
 .pista-badge { background: #1B3A6B; color: #E8C97A; font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 700; width: 18px; height: 18px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
 
-.crucigrama-vacio { width: 36px; height: 36px; }
-/* Emparejar */
+.crucigrama-vacio { width: 36px; height: 36px; flex-shrink: 0; }
+
+/* ===== Emparejar ===== */
 .border-selected-match { border-color:var(--text-primary) !important; background: #E4EBF5 !important; }
 .border-success-match  { border-color: var(--border-success) !important; background: var(--bg-success) !important; }
 .border-error-match    { border-color: var(--border-error) !important; background: var(--bg-error) !important; }
 
-/* Formas de Platón — imágenes */
+/* ===== Formas de Platón — imágenes ===== */
 .imagen-normal     { background:var(--bg-light); border-color: rgba(201,168,76,0.25) !important; }
 .imagen-seleccionada { background: #E4EBF5 !important; border-color:var(--text-primary) !important; box-shadow: 0 0 0 3px rgba(27,58,107,0.15); }
 .imagen-correcta   { background: #D7EDD5 !important; border-color: #5C6E2E !important; opacity: 0.85; }
 
-/* Formas de Platón — conceptos */
+/* ===== Formas de Platón — conceptos ===== */
 .concepto-normal     { background: var(--bg-warm); border-color: rgba(201,168,76,0.2) !important; }
 .concepto-seleccionado { background: #E4EBF5 !important; border-color:var(--text-primary) !important; box-shadow: 0 0 0 3px rgba(27,58,107,0.15); }
 .concepto-correcto   { background: #D7EDD5 !important; border-color: #5C6E2E !important; opacity: 0.85; }
 
-/* Sopa de Letras */
+/* ===== Sopa de Letras ===== */
 .sopa-grid {
   display: inline-block;
   background: var(--bg-card);
@@ -1348,6 +1368,9 @@ function reiniciarCrucigrama() {
   border-radius: 8px;
   padding: 6px;
   user-select: none;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
 }
 .sopa-fila {
   display: flex;
@@ -1366,6 +1389,7 @@ function reiniciarCrucigrama() {
   transition: all 0.15s;
   border-radius: 4px;
   margin: 1px;
+  flex-shrink: 0;
 }
 .sopa-celda:hover {
   background: rgba(201,168,76,0.15);
@@ -1384,19 +1408,83 @@ function reiniciarCrucigrama() {
   color: #AED581 !important;
 }
 
+/* ═══════════════════════════════════════
+   RESPONSIVE — MOBILE FIRST (< 600px)
+   ═══════════════════════════════════════ */
 @media (max-width: 600px) {
+  /* Header más compacto */
+  .actividades-titulo {
+    font-size: 1.2rem;
+  }
+  .actividades-subtitulo {
+    font-size: 0.78rem;
+  }
+  /* Tarjetas de actividad más compactas */
+  .actividad-card {
+    min-width: 0;
+  }
+
+  /* Sopa de letras: celdas más pequeñas para caber en pantalla */
   .sopa-celda {
-    width: 20px;
-    height: 20px;
-    font-size: 0.75rem;
+    width: 19px;
+    height: 19px;
+    font-size: 0.65rem;
+    margin: 0.5px;
+    border-radius: 2px;
+  }
+  .sopa-grid {
+    padding: 3px;
+  }
+
+  /* Crucigrama: celdas más pequeñas */
+  .crucigrama-celda-wrapper {
+    width: 28px;
+    height: 28px;
+  }
+  .crucigrama-input {
+    width: 26px;
+    height: 26px;
+    font-size: 0.85rem;
+  }
+  .crucigrama-vacio {
+    width: 26px;
+    height: 26px;
+  }
+  .pista-numero {
+    font-size: 0.5rem;
+    top: 1px;
+    left: 2px;
+  }
+  .pista-item {
+    font-size: 0.85rem;
+  }
+  .pista-badge {
+    width: 16px;
+    height: 16px;
+    font-size: 0.55rem;
   }
 }
-@media (max-width: 400px) {
+
+/* Pantallas muy pequeñas (< 380px) */
+@media (max-width: 380px) {
   .sopa-celda {
     width: 16px;
     height: 16px;
-    font-size: 0.65rem;
+    font-size: 0.58rem;
     margin: 0;
+  }
+  .crucigrama-celda-wrapper {
+    width: 24px;
+    height: 24px;
+  }
+  .crucigrama-input {
+    width: 22px;
+    height: 22px;
+    font-size: 0.75rem;
+  }
+  .crucigrama-vacio {
+    width: 22px;
+    height: 22px;
   }
 }
 </style>
