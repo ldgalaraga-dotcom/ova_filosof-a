@@ -475,8 +475,8 @@
           <v-card-text class="pa-5">
             <v-row>
               <v-col cols="12" md="7" class="d-flex flex-column align-center">
-                <div class="crucigrama-container pa-4 rounded-xl">
-                  <div v-for="(fila, y) in crucigrama.grid" :key="'cf-'+y" class="d-flex">
+                <div class="crucigrama-container pa-2 pa-md-4 rounded-xl" style="width:100%">
+                  <div v-for="(fila, y) in crucigrama.grid" :key="'cf-'+y" class="d-flex justify-center">
                     <div v-for="(celda, x) in fila" :key="'cc-'+x+'-'+y" class="crucigrama-celda-wrapper">
                       <div v-if="celda !== ''" class="celda-activa">
                         <!-- Número de pista -->
@@ -492,12 +492,20 @@
                   </div>
                 </div>
                 
-                <div class="d-flex gap-3 mt-5">
-                  <v-btn color="secondary" variant="flat" rounded="lg" prepend-icon="mdi-check-all"
+                <div class="d-flex flex-column flex-sm-row gap-2 mt-4 w-100 justify-center align-center">
+                  <v-btn color="secondary" variant="flat" rounded="lg" prepend-icon="mdi-check-all" block class="d-sm-none"
+                    style="font-family:'Cinzel',serif;letter-spacing:0.05em" @click="verificarCrucigrama">
+                    Verificar
+                  </v-btn>
+                  <v-btn color="secondary" variant="flat" rounded="lg" prepend-icon="mdi-check-all" class="d-none d-sm-flex"
                     style="font-family:'Cinzel',serif;letter-spacing:0.05em" @click="verificarCrucigrama">
                     Verificar Respuestas
                   </v-btn>
-                  <v-btn color="grey" variant="outlined" rounded="lg" prepend-icon="mdi-refresh"
+                  <v-btn color="grey" variant="outlined" rounded="lg" prepend-icon="mdi-refresh" block class="d-sm-none"
+                    style="font-family:'Cinzel',serif;letter-spacing:0.05em" @click="reiniciarCrucigrama">
+                    Reiniciar
+                  </v-btn>
+                  <v-btn color="grey" variant="outlined" rounded="lg" prepend-icon="mdi-refresh" class="d-none d-sm-flex"
                     style="font-family:'Cinzel',serif;letter-spacing:0.05em" @click="reiniciarCrucigrama">
                     Reiniciar
                   </v-btn>
@@ -505,7 +513,7 @@
               </v-col>
               
               <v-col cols="12" md="5">
-                <div class="pa-4 rounded-lg" style="background:rgba(201,168,76,0.05); border:1px solid rgba(201,168,76,0.2); max-height: 500px; overflow-y: auto;">
+                <div class="pa-3 pa-md-4 rounded-lg" style="background:rgba(201,168,76,0.05); border:1px solid rgba(201,168,76,0.2); max-height: 400px; overflow-y: auto;">
                   <div class="mb-4">
                     <div class="text-overline mb-1" style="color:var(--text-muted)">Horizontales</div>
                     <div v-for="h in crucigrama.hints.filter(h => h.dir === 'H')" :key="'h-'+h.id" class="pista-item">
@@ -1327,10 +1335,31 @@ function reiniciarCrucigrama() {
 .crucigrama-grid { display: flex; flex-direction: column; gap: 4px; background: rgba(0,0,0,0.05); padding: 8px; border-radius: 8px; }
 .crucigrama-container { background: rgba(27,58,107,0.03); border: 2px solid rgba(201,168,76,0.3); box-shadow: inset 0 0 15px rgba(0,0,0,0.05); overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .celda-activa { position: relative; }
-.pista-numero { position: absolute; top: 2px; left: 4px; font-size: 0.6rem; font-family: 'Cinzel', serif; font-weight: 700; color: #1B3A6B; z-index: 1; pointer-events: none; }
-.crucigrama-celda-wrapper { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; margin: 1px; flex-shrink: 0; }
-.crucigrama-input { width: 36px; height: 36px; text-align: center; font-family: 'Cinzel', serif; font-size: 1.1rem; border: 1px solid #C9A84C; background: white; border-radius: 4px; text-transform: uppercase; transition: all 0.2s; }
-.crucigrama-input:focus { outline: none; border-color: #1B3A6B; background: #F8F4EC; transform: scale(1.05); z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.pista-numero { position: absolute; top: 1px; left: 3px; font-size: 0.55rem; font-family: 'Cinzel', serif; font-weight: 700; color: #1B3A6B; z-index: 1; pointer-events: none; }
+.crucigrama-celda-wrapper { 
+  width: calc((100vw - 80px) / 12);
+  max-width: 38px;
+  aspect-ratio: 1;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin: 0.5px; 
+  flex-shrink: 0; 
+}
+.crucigrama-input { 
+  width: 100%; 
+  height: 100%; 
+  text-align: center; 
+  font-family: 'Cinzel', serif; 
+  font-size: clamp(0.7rem, 2.5vw, 1.1rem); 
+  border: 1px solid #C9A84C; 
+  background: white; 
+  border-radius: 3px; 
+  text-transform: uppercase; 
+  transition: all 0.2s;
+  padding: 0;
+}
+.crucigrama-input:focus { outline: none; border-color: #1B3A6B; background: #F8F4EC; z-index: 2; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 .celda-correcta { background: var(--bg-success) !important; border-color: var(--border-success) !important; color: var(--text-success) !important; font-weight: 700; }
 .celda-incorrecta { background: var(--bg-error) !important; border-color: var(--border-error) !important; color: var(--border-error) !important; animation: shake 0.3s; }
 
@@ -1340,10 +1369,15 @@ function reiniciarCrucigrama() {
   75% { transform: translateX(2px); }
 }
 
-.pista-item { font-family: 'EB Garamond', serif; font-size: 0.95rem; margin-bottom: 8px; line-height: 1.3; color: var(--text-dark); display: flex; align-items: flex-start; gap: 8px; }
-.pista-badge { background: #1B3A6B; color: #E8C97A; font-family: 'Cinzel', serif; font-size: 0.65rem; font-weight: 700; width: 18px; height: 18px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+.pista-item { font-family: 'EB Garamond', serif; font-size: 0.9rem; margin-bottom: 6px; line-height: 1.3; color: var(--text-dark); display: flex; align-items: flex-start; gap: 6px; }
+.pista-badge { background: #1B3A6B; color: #E8C97A; font-family: 'Cinzel', serif; font-size: 0.6rem; font-weight: 700; width: 18px; height: 18px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
 
-.crucigrama-vacio { width: 36px; height: 36px; flex-shrink: 0; }
+.crucigrama-vacio { 
+  width: calc((100vw - 80px) / 12);
+  max-width: 38px;
+  aspect-ratio: 1;
+  flex-shrink: 0; 
+}
 
 /* ===== Emparejar ===== */
 .border-selected-match { border-color:var(--text-primary) !important; background: #E4EBF5 !important; }
@@ -1436,27 +1470,18 @@ function reiniciarCrucigrama() {
     padding: 3px;
   }
 
-  /* Crucigrama: celdas más pequeñas */
-  .crucigrama-celda-wrapper {
-    width: 28px;
-    height: 28px;
-  }
-  .crucigrama-input {
-    width: 26px;
-    height: 26px;
-    font-size: 0.85rem;
-  }
-  .crucigrama-vacio {
-    width: 26px;
-    height: 26px;
+  /* Crucigrama: ya no necesita override porque usa calc(), pero ajustamos el contenedor */
+  .crucigrama-container {
+    padding: 4px !important;
   }
   .pista-numero {
-    font-size: 0.5rem;
-    top: 1px;
-    left: 2px;
+    font-size: 0.45rem;
+    top: 0px;
+    left: 1px;
   }
   .pista-item {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
+    margin-bottom: 4px;
   }
   .pista-badge {
     width: 16px;
@@ -1474,17 +1499,10 @@ function reiniciarCrucigrama() {
     margin: 0;
   }
   .crucigrama-celda-wrapper {
-    width: 24px;
-    height: 24px;
-  }
-  .crucigrama-input {
-    width: 22px;
-    height: 22px;
-    font-size: 0.75rem;
+    width: calc((100vw - 50px) / 12);
   }
   .crucigrama-vacio {
-    width: 22px;
-    height: 22px;
+    width: calc((100vw - 50px) / 12);
   }
 }
 </style>
